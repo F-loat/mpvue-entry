@@ -1,0 +1,27 @@
+{
+  "name": "mpvue-entry",
+  "version": "0.1.0",
+  "description": "通过配置文件自动生成各页面对应的 main.js 文件，并返回 entry",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/F-loat/mpvue-entry.git"
+  },
+  "keywords": [
+    "mpvue",
+    "entry",
+    "webpack"
+  ],
+  "author": "F-loat <chaimaoyuan@foxmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/F-loat/mpvue-entry/issues"
+  },
+  "homepage": "https://github.com/F-loat/mpvue-entry#readme"
+}
