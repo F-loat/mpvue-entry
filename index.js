@@ -16,7 +16,9 @@ function transformCode (str) {
 }
 
 function genEntry (config_file) {
-  const pages = require(config_file)
+  
+  const pages = path.isAbsolute(config_file) ?
+    require(config_file) : require(resolveApp(config_file))
 
   const entry = {
     app: resolveApp('./src/main.js')
