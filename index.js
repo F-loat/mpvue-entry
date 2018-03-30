@@ -24,12 +24,13 @@ function genEntry (config_file) {
 
   const template = transformCode(String(fs.readFileSync(entry.app)))
 
-  template.match(/export default ?{([^]*)}/)
+  template.match(/export default ?({[^]*})/)
 
   pages.forEach((page) => {
     const entryFile = resolveModule(`./${page.name}.js`)
 
-    fs.writeFileSync(entryFile, template.replace(RegExp.$1, `${page.wx || ''}`))
+    const config = JSON.stringify(page.wx || {})
+    fs.writeFileSync(entryFile, template.replace(RegExp.$1, config))
 
     entry[page.path] = entryFile
   })
