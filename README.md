@@ -38,12 +38,10 @@ module.exports = {
 // pages.js
 module.exports = [
   {
-    path: '/pages/news/list',
-    name: 'NewsList',
-    wx: {
-      config: {
-        enablePullDownRefresh: true
-      }
+    path: 'pages/news/list', // 页面路径，同时是文件相对于 src 的路径
+    config: { // 页面配置，即 page.json 的内容
+      navigationBarTitleText: '文章列表',
+      enablePullDownRefresh: true
     }
   }
 ]

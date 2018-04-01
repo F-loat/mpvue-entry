@@ -21,14 +21,17 @@ function genEntry (config_file) {
   const template = String(fs.readFileSync(entry.app))
 
   pages.forEach((page) => {
-    const entryFile = resolveModule(`./${page.name}.js`)
+    const { name, path, config } = page
 
-    const config = JSON.stringify(page.wx || {})
-    fs.writeFileSync(entryFile, template
-      .replace(/import App from .*/, `import App from '@${page.path}'`)
-      .replace(/export default ?{[^]*}/, `export default ${config}`))
+    const fileName = name || path.replace(/\/(\w)/g, ($0, $1) => $1.toUpperCase())
+    const entryPath = resolveModule(`./${fileName}.js`)
+    const realPath = path.replace(/^\//, '')
 
-    entry[page.path.replace(/^\//, '')] = entryFile
+    fs.writeFileSync(entryPath, template
+      .replace(/import App from .*/, `import App from '@/${realPath}'`)
+      .replace(/export default ?{[^]*}/, `export default ${JSON.stringify({ config })}`))
+
+    entry[realPath] = entryPath
   })
 
   return entry
