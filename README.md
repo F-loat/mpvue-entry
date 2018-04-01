@@ -14,6 +14,23 @@ const genEntry = require('mpvue-entry')
 module.exports = {
   entry: genEntry('./src/pages.js'),
   ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: [resolve('src'), resolve('node_modules/mpvue-entry')],
+        use: [
+          'babel-loader',
+          {
+            loader: 'mpvue-loader',
+            options: {
+              checkMPEntry: true
+            }
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 

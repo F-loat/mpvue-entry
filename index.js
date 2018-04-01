@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const babel = require('babel-core')
 
 function resolveApp (dir) {
   return path.join(path.dirname(require.main.filename), '..', dir)
@@ -8,11 +7,6 @@ function resolveApp (dir) {
 
 function resolveModule (dir) {
   return path.join(__dirname, dir)
-}
-
-function transformCode (str) {
-  const babelrc = resolveApp('./.babelrc')
-  return babel.transform(str, { extends: babelrc }).code
 }
 
 function genEntry (config_file) {
@@ -24,7 +18,7 @@ function genEntry (config_file) {
     app: resolveApp('./src/main.js')
   }
 
-  const template = transformCode(String(fs.readFileSync(entry.app)))
+  const template = String(fs.readFileSync(entry.app))
 
   pages.forEach((page) => {
     const entryFile = resolveModule(`./${page.name}.js`)
