@@ -10,7 +10,6 @@ function resolveModule (dir) {
 }
 
 function genEntry (config_file) {
-
   const pages = path.isAbsolute(config_file) ?
     require(config_file) : require(resolveApp(config_file))
 
@@ -18,7 +17,7 @@ function genEntry (config_file) {
     app: resolveApp('./src/main.js')
   }
 
-  const template = String(fs.readFileSync(entry.app))
+  const template = String(fs.readFileSync(entry.app)).replace(/App.mpType.*/, '')
 
   pages.forEach((page) => {
     const { name, path, config } = page
