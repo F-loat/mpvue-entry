@@ -2,19 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routes'
 
-const components = {
-  NewsList: () => import('@/pages/news/list'),
-  NewsDetail: () => import('@/pages/news/detail'),
-  NewsComment: () => import('@/pages/news/comment'),
-  QuanziList: () => import('@/pages/quanzi/list'),
-  QuanziDetail: () => import('@/pages/quanzi/detail')
-}
-
 Vue.use(Router)
 
 export default new Router({
   routes: routes.map(route => {
-    route.component = components[route.name]
+    // 若多级目录嵌套，可通过 paths.length 判断后做不同处理
+    const paths = route.path.replace(/^\//, '').split('/')
+    route.component = () => import(`@/${paths[0]}/${paths[1]}/${paths[2]}`)
     return route
   }),
   mode: 'history'

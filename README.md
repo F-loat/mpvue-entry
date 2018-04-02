@@ -4,6 +4,22 @@
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 
+## 目录结构
+```
+├─build
+├─config
+├─src
+│ ├─components
+│ ├─pages
+│ │  └─news
+│ │     │─list.vue
+│ │     └─detail.vue
+│ ├─App.vue
+│ ├─main.js
+│ └─pages.js
+└─package.json
+```
+
 ## 原理
 
 以 `src/main.js` 为模板，使用配置文件中的 `path` 及 `config` 属性分别替换 `vue 文件导入路径` 及 `导出信息`
@@ -52,22 +68,6 @@ module.exports = [
     }
   }
 ]
-```
-
-## 目录结构
-```
-├─build
-├─config
-├─src
-│ ├─components
-│ ├─pages
-│ │  └─news
-│ │     │─list.vue
-│ │     └─detail.vue
-│ ├─App.vue
-│ ├─main.js
-│ └─pages.js
-└─package.json
 ```
 
 ## 示例
