@@ -32,7 +32,7 @@ npm i mpvue-entry -D
 ## 使用
 ``` js
 // webpack.base.conf.js
-const genEntry = require('mpvue-entry')
+const genEntry = require('mpvue-entry') // genEntry(config, main?)
 
 module.exports = {
   entry: genEntry('./src/pages.js'),

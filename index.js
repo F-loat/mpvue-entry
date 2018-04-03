@@ -9,11 +9,11 @@ function resolveModule (dir) {
   return path.join(__dirname, dir)
 }
 
-function genEntry (config_file) {
+function genEntry (config_file, main_file) {
   const pages = require(resolveApp(config_file))
 
   const entry = {
-    app: resolveApp('./src/main.js')
+    app: resolveApp(main_file || './src/main.js')
   }
 
   const template = String(fs.readFileSync(entry.app)).replace(/App.mpType.*/, '')
