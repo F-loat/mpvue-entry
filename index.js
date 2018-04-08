@@ -62,7 +62,7 @@ function genEntry() {
   const entry = { app: templatePath }
 
   // 获取新旧入口文件模板
-  const template = String(fs.readFileSync(templatePath))
+  const template = String(fs.readFileSync(templatePath)).replace(/.*mpType.*/, '')
   const bakTemplate = fs.existsSync(bakTemplatePath) ? String(fs.readFileSync(bakTemplatePath)) : ''
 
   const isTemplateChanged = template !== bakTemplate
@@ -87,7 +87,6 @@ function genEntry() {
     if (isTemplateChanged || isConfigChanged(page, oldPages)) {
       // 生成入口文件
       return writeFile(entryPath, template
-        .replace(/App.mpType.*/, '')
         .replace(/import App from .*/, `import App from '@/${pagePath}'`)
         .replace(/export default ?{[^]*}/, `export default ${pageConfig}`))
     }
@@ -103,9 +102,7 @@ function genEntry() {
     const configWriteStream = fs.createWriteStream(bakPagesPath)
     configReadStream.pipe(configWriteStream)
     // 备份入口模板文件
-    const templateReadStream = fs.createReadStream(templatePath)
-    const templateWriteStream = fs.createWriteStream(bakTemplatePath)
-    templateReadStream.pipe(templateWriteStream)
+    writeFile(bakTemplatePath, template)
   })
 
   return entry
