@@ -92,6 +92,8 @@ function genEntry() {
         .replace(/export default ?{[^]*}/, `export default ${pageConfig}`))
     }
 
+    return Promise.resolve()
+
   })
 
   // 备份文件
