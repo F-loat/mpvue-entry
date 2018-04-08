@@ -77,7 +77,7 @@ function genEntry() {
     const pageConfig = JSON.stringify({ config: page.config })
 
     // 入口文件的文件名
-    const fileName = page.name || pagePath.replace(/(\w)/g, ($0, $1) => $1.toUpperCase())
+    const fileName = page.name || pagePath.replace(/\/(\w)/g, ($0, $1) => $1.toUpperCase())
 
     // 入口文件的完整路径
     const entryPath = resolveModule(`./${fileName}.js`)
