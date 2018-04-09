@@ -55,8 +55,8 @@ function genEntry(...arg) {
   const bakTemplatePath = resolveModule('./template.bak.js')
 
   // 获取所有新旧页面的配置
-  delete require.cache[pagesPath]
-  delete require.cache[bakPagesPath]
+  require.cache[pagesPath] = null
+  require.cache[bakPagesPath] = null
   const pages = require(pagesPath)
   const oldPages = fs.existsSync(bakPagesPath) ? require(bakPagesPath) : []
   if (!Array.isArray(pages) || !Array.isArray(oldPages)) return null
