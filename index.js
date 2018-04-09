@@ -46,7 +46,7 @@ function isConfigChanged(page, oldPages) {
 
 }
 
-function genEntry() {
+function genEntry(...arg) {
 
   // 获取各文件的绝对路径
   const pagesPath = resolveApp(arguments[0])
@@ -55,17 +55,20 @@ function genEntry() {
   const bakTemplatePath = resolveModule('./template.bak.js')
 
   // 获取所有新旧页面的配置
+  delete require.cache[pagesPath]
+  delete require.cache[bakPagesPath]
   const pages = require(pagesPath)
   const oldPages = fs.existsSync(bakPagesPath) ? require(bakPagesPath) : []
-
-  // 创建入口配置对象
-  const entry = { app: templatePath }
+  if (!Array.isArray(pages) || !Array.isArray(oldPages)) return null
 
   // 获取新旧入口文件模板
   const template = String(fs.readFileSync(templatePath)).replace(/.*mpType.*/, '')
   const bakTemplate = fs.existsSync(bakTemplatePath) ? String(fs.readFileSync(bakTemplatePath)) : ''
 
   const isTemplateChanged = template !== bakTemplate
+
+  // 创建入口配置对象
+  const entry = { app: templatePath }
 
   // 生成入口文件的队列
   const queue = pages.map((page) => {
@@ -104,6 +107,10 @@ function genEntry() {
     // 备份入口模板文件
     writeFile(bakTemplatePath, template)
   })
+
+  // 监听文件
+  fs.watch(pagesPath, { persistent: false }, () => genEntry(...arg))
+  fs.watch(templatePath, { persistent: false }, () => genEntry(...arg))
 
   return entry
 
