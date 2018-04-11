@@ -55,11 +55,14 @@ function genEntry(...arg) {
   const bakTemplatePath = resolveModule('./template.bak.js')
 
   // 获取所有新旧页面的配置
+  let pages = require(pagesPath)
+  let oldPages = fs.existsSync(bakPagesPath) ? require(bakPagesPath) : []
+  if (!Array.isArray(pages)) pages = []
+  if (!Array.isArray(oldPages)) oldPages = []
+
+  // 清除 require 缓存
   require.cache[pagesPath] = null
   require.cache[bakPagesPath] = null
-  const pages = require(pagesPath)
-  const oldPages = fs.existsSync(bakPagesPath) ? require(bakPagesPath) : []
-  if (!Array.isArray(pages) || !Array.isArray(oldPages)) return null
 
   // 获取新旧入口文件模板
   const template = String(fs.readFileSync(templatePath)).replace(/.*mpType.*/, '')
