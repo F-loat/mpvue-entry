@@ -34,8 +34,8 @@ function isConfigChanged(page, oldPages) {
   const oldPage = oldPages.splice(oldPageIndex, 1)[0]
 
   // 对比新旧配置的键
-  const keys = Object.keys(page.config)
-  const oldKeys = Object.keys(oldPage.config)
+  const keys = Object.keys(page.config || {})
+  const oldKeys = Object.keys(oldPage.config || {})
 
   if (keys.length !== oldKeys.length) return true
 
