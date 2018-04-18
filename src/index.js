@@ -6,9 +6,9 @@ function resolveApp(dir) {
   return path.join(path.dirname(require.main.filename), '..', dir);
 }
 
-// 模块内文件绝对路径获取函数
-function resolveModule(dir) {
-  return path.join(__dirname, dir);
+// 输出文件绝对路径获取函数
+function resolveModuleDist(dir) {
+  return path.join(__dirname, '../dist', dir);
 }
 
 // 文件写入函数
@@ -45,9 +45,9 @@ function isConfigChanged(page, oldPages) {
 function genEntry(...arg) {
   // 获取各文件的绝对路径
   const pagesPath = resolveApp(arg[0]);
-  const bakPagesPath = resolveModule('./pages.bak.js');
+  const bakPagesPath = resolveModuleDist('./pages.bak.js');
   const templatePath = resolveApp(arg[1] || './src/main.js');
-  const bakTemplatePath = resolveModule('./template.bak.js');
+  const bakTemplatePath = resolveModuleDist('./template.bak.js');
 
   // 获取所有新旧页面的配置
   let pages = require(pagesPath);
@@ -80,7 +80,7 @@ function genEntry(...arg) {
     const fileName = page.name || pagePath.replace(/\/(\w)/g, ($0, $1) => $1.toUpperCase());
 
     // 入口文件的完整路径
-    const entryPath = resolveModule(`./${fileName}.js`);
+    const entryPath = resolveModuleDist(`./${fileName}.js`);
 
     entry[pagePath] = entryPath;
 
