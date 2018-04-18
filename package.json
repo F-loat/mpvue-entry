@@ -7,6 +7,7 @@
     "example": "examples"
   },
   "scripts": {
+    "lint": "eslint --format node_modules/eslint-friendly-formatter --ext .js src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/F-loat/mpvue-entry/issues"
   },
-  "homepage": "https://github.com/F-loat/mpvue-entry#readme"
+  "homepage": "https://github.com/F-loat/mpvue-entry#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-friendly-formatter": "^4.0.1"
+  }
 }
