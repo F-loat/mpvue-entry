@@ -7,8 +7,8 @@ function resolveApp(dir) {
 }
 
 // 输出文件绝对路径获取函数
-function resolveModuleDist(dir) {
-  return path.join(__dirname, '../dist', dir);
+function resolveModule(dir) {
+  return path.join(__dirname, '..', dir);
 }
 
 // 文件写入函数
@@ -45,9 +45,9 @@ function isConfigChanged(page, oldPages) {
 function genEntry(...arg) {
   // 获取各文件的绝对路径
   const pagesPath = resolveApp(arg[0]);
-  const bakPagesPath = resolveModuleDist('./pages.bak.js');
+  const bakPagesPath = resolveModule('./dist/pages.bak.js');
   const templatePath = resolveApp(arg[1] || './src/main.js');
-  const bakTemplatePath = resolveModuleDist('./template.bak.js');
+  const bakTemplatePath = resolveModule('./dist/template.bak.js');
 
   // 获取所有新旧页面的配置
   let pages = require(pagesPath);
@@ -60,8 +60,16 @@ function genEntry(...arg) {
   require.cache[bakPagesPath] = null;
 
   // 获取新旧入口文件模板
-  const template = String(fs.readFileSync(templatePath)).replace(/.*mpType.*/, '');
+  let template = String(fs.readFileSync(templatePath)).replace(/\n*.*mpType.*\n*/, '\n\n');
   const bakTemplate = fs.existsSync(bakTemplatePath) ? String(fs.readFileSync(bakTemplatePath)) : '';
+
+  const mixinReg = /\n*Vue\.mixin(.*).*\n*/;
+  while (mixinReg.test(template)) {
+    // 去除 mixin 混入语句
+    template = template.replace(mixinReg, '\n\n')
+      // 去除 mixin 文件导入语句
+      .replace(new RegExp(`\n*import ${RegExp.$1 || null}.*\n*`), '\n\n');
+  }
 
   const isTemplateChanged = template !== bakTemplate;
 
@@ -80,7 +88,7 @@ function genEntry(...arg) {
     const fileName = page.name || pagePath.replace(/\/(\w)/g, ($0, $1) => $1.toUpperCase());
 
     // 入口文件的完整路径
-    const entryPath = resolveModuleDist(`./${fileName}.js`);
+    const entryPath = resolveModule(`./dist/${fileName}.js`);
 
     entry[pagePath] = entryPath;
 
