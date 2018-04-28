@@ -1,6 +1,6 @@
 # mpvue-entry
 
->通过配置文件自动生成各页面对应的 main.js 文件，并返回 entry
+>通过配置文件自动生成各页面对应的 main.js 文件，并返回 entry，已完全支持热更新
 
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
@@ -36,10 +36,10 @@ npm i mpvue-entry -D
 
 ``` js
 // webpack.base.conf.js
-const genEntry = require('mpvue-entry') // genEntry(config, main?)
+const getEntry = require('mpvue-entry') // getEntry(pages.js, main.js?, app.json?)
 
 module.exports = {
-  entry: genEntry('./src/pages.js'),
+  entry: getEntry('./src/pages.js'),
   ...
   module: {
     rules: [
@@ -75,6 +75,18 @@ module.exports = [
 ```
 
 ## Tips
+
+* v1.0 之后的版本会重置 `app.json` 的 `pages` 属性，所以无法在 `main.js` 中设置首页，需要设置为首页的页面放在 `pages.js` 的最前面即可
+
+``` js
+// pages.js
+module.exports = [
+  {
+    path: '/pages/news/list', // 首页
+    path: '/pages/news/detail'
+  }
+]
+```
 
 * 在 `src/main.js` 中引用文件时需通过 `@` 标识引用
 
