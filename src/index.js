@@ -11,19 +11,19 @@ function getEntry(...arg) {
     app: utils.resolveApp(arg[2] || './dist/app.json'),
   };
 
-  return () => {
-    let enrty = utils.genEntry(paths);
+  let entry = utils.genEntry(paths);
 
-    // 监听文件
-    fs.watch(paths.pages, () => {
-      enrty = utils.genEntry(paths);
-    });
-    fs.watch(paths.template, () => {
-      enrty = utils.genEntry(paths);
-    });
+  // 监听文件
+  fs.watch(paths.pages, () => {
+    utils.resetApp(paths);
+    entry = utils.genEntry(paths);
+  });
+  fs.watch(paths.template, () => {
+    utils.resetApp(paths);
+    entry = utils.genEntry(paths);
+  });
 
-    return enrty;
-  };
+  return () => entry;
 }
 
 module.exports = getEntry;

@@ -76,7 +76,9 @@ module.exports = [
 
 ## Tips
 
-* v1.0 之后的版本会重置 `app.json` 的 `pages` 属性，所以无法在 `main.js` 中设置首页，需要设置为首页的页面放在 `pages.js` 的最前面即可
+* v1.0 之后的版本需等待 `mpvue-loader` 更新才可正常使用
+
+* 首页配置以 `main.js` 为主，若 `main.js` 中未配置则为 `pages.js` 里的第一个页面
 
 ``` js
 // pages.js

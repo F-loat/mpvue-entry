@@ -70,17 +70,13 @@ function genEntry(paths) {
   // 创建入口配置对象
   const entry = { app: paths.template };
 
-  // 重置 pages 配置
-  const app = require(paths.app);
-  app.pages = [];
-
   // 生成入口文件的队列
   const queue = pages.map((page) => {
     // 页面路径
     const pagePath = page.path.replace(/^\//, '');
 
     // 页面配置
-    const pageConfig = JSON.stringify({ config: page.config });
+    const pageConfig = JSON.stringify({ config: page.config }, null, '  ');
 
     // 入口文件的文件名
     const fileName = page.name || pagePath.replace(/\/(\w)/g, ($0, $1) => $1.toUpperCase());
@@ -89,8 +85,6 @@ function genEntry(paths) {
     const entryPath = resolveModule(`./dist/${fileName}.js`);
 
     entry[pagePath] = entryPath;
-
-    app.pages.push(pagePath);
 
     if (isTemplateChanged || isConfigChanged(page, oldPages)) {
       // 生成入口文件
@@ -102,7 +96,7 @@ function genEntry(paths) {
     return Promise.resolve();
   });
 
-  // 备份及重置文件
+  // 备份文件
   Promise.all(queue).then(() => {
     // 备份页面配置文件
     const configReadStream = fs.createReadStream(paths.pages);
@@ -110,11 +104,27 @@ function genEntry(paths) {
     configReadStream.pipe(configWriteStream);
     // 备份入口模板文件
     writeFile(paths.bakTemplate, template);
-    // 重置配置文件
-    writeFile(paths.app, JSON.stringify(app, null, ' '));
   });
 
   return entry;
+}
+
+// 重置配置文件
+function resetApp(paths) {
+  const app = require(paths.app);
+  const pages = require(paths.pages);
+  if (!Array.isArray(pages) || !app.pages) return;
+  const firstPage = app.pages[0];
+  app.pages = [];
+  pages.forEach(page => {
+    const pagePath = page.path.replace(/^\//, '');
+    if (pagePath !== firstPage) {
+      app.pages.push(pagePath)
+    } else {
+      app.pages.unshift(pagePath)
+    }
+  });
+  writeFile(paths.app, JSON.stringify(app, null, '  '));
 }
 
 module.exports = {
@@ -123,4 +133,5 @@ module.exports = {
   writeFile,
   isConfigChanged,
   genEntry,
+  resetApp,
 };
