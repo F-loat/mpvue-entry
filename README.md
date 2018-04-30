@@ -29,7 +29,7 @@
 ## 安装
 
 ``` bash
-npm i mpvue-entry -D
+npm i mpvue-entry@0.x -D
 ```
 
 ## 使用
