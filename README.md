@@ -80,13 +80,12 @@ module.exports = [
 getEntry(paths, options)
 ```
 
-### 默认值
-
 * paths [String/Object]
 
-> paths 为 String 类型时作为 pages 的值，自定义值均相对于项目根目录
+paths 为 String 类型时作为 pages 的值，自定义值均相对于项目根目录
 
 ``` js
+// 默认值
 {
   // 页面配置文件
   pages: utils.resolveApp('./src/pages.js'),
@@ -100,15 +99,27 @@ getEntry(paths, options)
   bakPages: utils.resolveModule('./src/pages.bak.js'),
   bakTemplate: utils.resolveModule('./src/template.bak.js')
 }
+
+// 示例
+getEntry({
+  pages: './src/router/index.js',
+  dist: './app',
+})
 ```
 
 * options [Object]
 
 ``` js
+// 默认值
 {
   // 是否启用缓存
   cache: true
 }
+
+// 示例
+getEntry('./src/pages.js', {
+  cache: false
+})
 ```
 
 ## Tips
