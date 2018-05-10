@@ -45,7 +45,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: [resolve('src'), resolve('node_modules/mpvue-entry')],
+        include: [resolve('src'), /mpvue-entry/],
         use: [
           'babel-loader',
           {
