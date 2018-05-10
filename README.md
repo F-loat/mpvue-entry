@@ -29,17 +29,17 @@
 ## 安装
 
 ``` bash
-npm i mpvue-entry -D
+npm i mpvue-entry@0.x -D
 ```
 
 ## 使用
 
 ``` js
 // webpack.base.conf.js
-const genEntry = require('mpvue-entry') // genEntry(config, main?)
+const getEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: genEntry('./src/pages.js'),
+  entry: getEntry('./src/pages.js'),
   ...
   module: {
     rules: [
@@ -72,6 +72,43 @@ module.exports = [
     }
   }
 ]
+```
+
+## 参数
+
+``` js
+getEntry(paths, options)
+```
+
+### 默认值
+
+* paths [String/Object]
+
+> paths 为 String 类型时作为 pages 的值，自定义值均相对于项目根目录
+
+``` js
+{
+  // 页面配置文件
+  pages: utils.resolveApp('./src/pages.js'),
+  // 主入口文件，作为模板
+  template: utils.resolveApp('./src/main.js'),
+  // 项目 dist 目录
+  dist: utils.resolveApp('./dist'),
+  // 各页面入口文件目录
+  entry: utils.resolveModule('./dist'),
+  // 备份文件
+  bakPages: utils.resolveModule('./src/pages.bak.js'),
+  bakTemplate: utils.resolveModule('./src/template.bak.js')
+}
+```
+
+* options [Object]
+
+``` js
+{
+  // 是否启用缓存
+  cache: true
+}
 ```
 
 ## Tips
