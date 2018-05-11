@@ -28,11 +28,9 @@ function getEntry(customPaths, customOptions) {
     pages: utils.resolveApp(customPaths),
   } : Object.keys(customPaths).reduce((accumulator, currentKey) => {
     const currentValue = customPaths[currentKey];
-    const userValue = {};
-    if (currentValue) {
-      userValue[currentKey] = utils.resolveApp(currentValue);
-    }
-    return Object.assign({}, accumulator, userValue);
+    return Object.assign({}, accumulator, {
+      [currentKey]: currentValue && utils.resolveApp(currentValue),
+    });
   }, {}));
   const options = Object.assign({}, defaultOptions, customOptions);
 
