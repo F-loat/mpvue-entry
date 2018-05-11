@@ -28,6 +28,7 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-friendly-formatter": "^4.0.1"
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-plugin-import": "^2.11.0"
   }
 }
