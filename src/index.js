@@ -29,7 +29,7 @@ function getEntry(customPaths, customOptions) {
   } : Object.keys(customPaths).reduce((accumulator, currentKey) => {
     const currentValue = customPaths[currentKey];
     return Object.assign({}, accumulator, {
-      currentKey: currentValue && utils.resolveApp(currentValue),
+      [currentKey]: currentValue && utils.resolveApp(currentValue),
     });
   }, {}));
   const options = Object.assign({}, defaultOptions, customOptions);
