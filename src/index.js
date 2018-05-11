@@ -1,4 +1,4 @@
-const fs    = require('fs');
+const fs = require('fs');
 const utils = require('./utils');
 
 function getEntry(customPaths, customOptions) {
@@ -29,8 +29,10 @@ function getEntry(customPaths, customOptions) {
   } : Object.keys(customPaths).reduce((accumulator, currentKey) => {
     const currentValue = customPaths[currentKey];
     const userValue = {};
-    currentValue && (userValue[currentKey] = utils.resolveApp(currentValue));
-    return Object.assign({}, accumulator,userValue);
+    if (currentValue) {
+      userValue[currentKey] = utils.resolveApp(currentValue);
+    }
+    return Object.assign({}, accumulator, userValue);
   }, {}));
   const options = Object.assign({}, defaultOptions, customOptions);
 
