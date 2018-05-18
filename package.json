@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint --format node_modules/eslint-friendly-formatter --ext .js src",
     "test": "mocha --harmony",
-    "test:cover": "istanbul cover ./node_modules/mocha/bin/_mocha --harmony"
+    "test:cover": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter --harmony"
   },
   "repository": {
     "type": "git",
