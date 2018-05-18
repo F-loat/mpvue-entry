@@ -62,7 +62,15 @@ describe('utils', () => {
       assert.equal(entry['app'], resolveTest('./assets/main.js'));
       assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
       rimraf(resolveTest('./temp'), (err) => {
-        if (err) console.log(err)
+        if (err) console.log(err);
+      });
+    });
+    it('should return entry object directly', () => {
+      const entry = utils.genEntry(paths, options);
+      assert.equal(entry['app'], resolveTest('./assets/main.js'));
+      assert.equal(entry['pages/b'], resolveTest('./temp/pageB.js'));
+      rimraf(resolveTest('./temp'), (err) => {
+        if (err) console.log(err);
       });
     });
   });
