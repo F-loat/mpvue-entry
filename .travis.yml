@@ -1,6 +1,9 @@
 language:
   node_js
 
+node_js:
+  - '8.11.2'
+
 env:
   global:
     - CODECOV_TOKEN: 05660d85-abcd-4469-a629-ca88e4e2bb07
