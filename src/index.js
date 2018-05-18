@@ -21,6 +21,8 @@ function getEntry(customPaths, customOptions) {
   const defaultOptions = {
     // 是否启用缓存
     cache: true,
+    // 是否监听改动
+    watch: true,
   };
 
   // 合并参数
@@ -44,13 +46,15 @@ function getEntry(customPaths, customOptions) {
   // 生成入口
   let entry = utils.genEntry(paths, options);
 
-  // 监听文件
-  fs.watch(paths.pages, () => {
-    entry = utils.genEntry(paths, options);
-  });
-  fs.watch(paths.template, () => {
-    entry = utils.genEntry(paths, options);
-  });
+  if (options.watch) {
+    // 监听文件
+    fs.watch(paths.pages, () => {
+      entry = utils.genEntry(paths, options);
+    });
+    fs.watch(paths.template, () => {
+      entry = utils.genEntry(paths, options);
+    });
+  }
 
   return entry;
 }

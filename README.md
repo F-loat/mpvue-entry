@@ -115,7 +115,9 @@ getEntry({
 // 默认值
 {
   // 是否启用缓存
-  cache: true
+  cache: true,
+  // 是否监听改动
+  watch: true
 }
 
 // 示例
