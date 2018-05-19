@@ -127,7 +127,7 @@ function resetApp(paths) {
       app.pages.unshift(pagePath);
     }
   });
-  writeFile(paths.app, JSON.stringify(app, null, '  '));
+  writeFile(appPath, JSON.stringify(app, null, '  '));
 }
 
 module.exports = {

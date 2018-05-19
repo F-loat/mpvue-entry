@@ -7,5 +7,6 @@ module.exports = {
   rules: {
     'import/no-dynamic-require': 0,
     'global-require': 0,
+    'consistent-return': 0,
   },
 };

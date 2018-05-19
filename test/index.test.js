@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 const assert = require('assert');
-const getEntry = require('../src');
+const MpvueEntry = require('../src');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);
@@ -22,12 +22,11 @@ describe('index', () => {
       cache: true,
       watch: false,
     };
-    it('should return entry object', () => {
+    it('should return entry function', () => {
       const tempPath = resolveTest('./temp');
       if (!fs.existsSync(tempPath)) fs.mkdirSync(tempPath);
-      const entry = getEntry(paths, options);
-      assert.equal(entry['app'], resolveTest('./assets/main.js'));
-      assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
+      const entry = MpvueEntry.getEntry(paths, options);
+      assert.equal(typeof entry, 'function');
       rimraf(tempPath, (err) => {
         if (err) console.log(err);
       });

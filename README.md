@@ -38,28 +38,14 @@ npm i mpvue-entry -D
 
 ``` js
 // webpack.base.conf.js
-const getEntry = require('mpvue-entry')
+const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: getEntry('./src/pages.js'),
+  entry: MpvueEntry.getEntry('./src/pages.js'),
   ...
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        include: [resolve('src'), /mpvue-entry/],
-        use: [
-          'babel-loader',
-          {
-            loader: 'mpvue-loader',
-            options: {
-              checkMPEntry: true
-            }
-          }
-        ]
-      }
-    ]
-  }
+  plugins: [
+    new MpvueEntry()
+  ]
 }
 ```
 
@@ -79,7 +65,7 @@ module.exports = [
 ## 参数
 
 ``` js
-getEntry(paths, options)
+MpvueEntry.getEntry(paths, options)
 ```
 
 * paths [String/Object]
@@ -103,7 +89,7 @@ paths 为 String 类型时作为 pages 的值，自定义值均相对于项目�
 }
 
 // 示例
-getEntry({
+MpvueEntry.getEntry({
   pages: './src/router/index.js',
   dist: './app',
 })
@@ -117,18 +103,18 @@ getEntry({
   // 是否启用缓存
   cache: true,
   // 是否监听改动
-  watch: true
+  watch: true,
+  // 是否启用插件
+  plugin: true
 }
 
 // 示例
-getEntry('./src/pages.js', {
+MpvueEntry.getEntry('./src/pages.js', {
   cache: false
 })
 ```
 
 ## Tips
-
-* v1.0 之后的版本需等待 `mpvue-loader` 更新才可正常使用
 
 * 首页配置以 `main.js` 为主，若 `main.js` 中未配置则为 `pages.js` 里的第一个页面
 
@@ -162,6 +148,34 @@ export default {
 
 // 或 main.js
 App.mpType = 'app'
+```
+
+* 若不启用插件需自行修改 rule 配置
+
+``` js
+// webpack.base.conf.js
+const MpvueEntry = require('mpvue-entry')
+
+module.exports = {
+  ...
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        include: [resolve('src'), /mpvue-entry/],
+        use: [
+          'babel-loader',
+          {
+            loader: 'mpvue-loader',
+            options: {
+              checkMPEntry: true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 ## 示例

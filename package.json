@@ -35,5 +35,8 @@
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
     "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "webpack": "*"
   }
 }

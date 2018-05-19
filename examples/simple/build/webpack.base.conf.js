@@ -1,6 +1,6 @@
 var path = require('path')
 var fs = require('fs')
-var genEntry = require('mpvue-entry')
+var MpvueEntry = require('mpvue-entry')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
@@ -10,7 +10,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  entry: genEntry('./src/pages.js'),
+  entry: MpvueEntry.getEntry('./src/pages.js'),
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
@@ -28,6 +28,9 @@ module.exports = {
     },
     symlinks: false
   },
+  plugins: [
+    new MpvueEntry()
+  ],
   module: {
     rules: [
       {
