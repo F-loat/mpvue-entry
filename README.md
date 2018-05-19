@@ -4,6 +4,8 @@
 
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
+[![Build Status](https://travis-ci.org/F-loat/mpvue-entry.svg?branch=v0.x)](https://travis-ci.org/F-loat/mpvue-entry)
+[![codecov](https://codecov.io/gh/F-loat/mpvue-entry/branch/v0.x/graph/badge.svg)](https://codecov.io/gh/F-loat/mpvue-entry)
 
 ## 目录结构
 
@@ -29,14 +31,14 @@
 ## 安装
 
 ``` bash
-npm i mpvue-entry@0.x -D
+npm i mpvue-entry -D
 ```
 
 ## 使用
 
 ``` js
 // webpack.base.conf.js
-const getEntry = require('mpvue-entry') // getEntry(pages.js, main.js?, app.json?)
+const getEntry = require('mpvue-entry')
 
 module.exports = {
   entry: getEntry('./src/pages.js'),
@@ -45,7 +47,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: [resolve('src'), resolve('node_modules/mpvue-entry')],
+        include: [resolve('src'), /mpvue-entry/],
         use: [
           'babel-loader',
           {
@@ -72,6 +74,56 @@ module.exports = [
     }
   }
 ]
+```
+
+## 参数
+
+``` js
+getEntry(paths, options)
+```
+
+* paths [String/Object]
+
+paths 为 String 类型时作为 pages 的值，自定义值均相对于项目根目录
+
+``` js
+// 默认值
+{
+  // 页面配置文件
+  pages: utils.resolveApp('./src/pages.js'),
+  // 主入口文件，作为模板
+  template: utils.resolveApp('./src/main.js'),
+  // 项目 dist 目录
+  dist: utils.resolveApp('./dist'),
+  // 各页面入口文件目录
+  entry: utils.resolveModule('./dist'),
+  // 备份文件
+  bakPages: utils.resolveModule('./src/pages.bak.js'),
+  bakTemplate: utils.resolveModule('./src/template.bak.js')
+}
+
+// 示例
+getEntry({
+  pages: './src/router/index.js',
+  dist: './app',
+})
+```
+
+* options [Object]
+
+``` js
+// 默认值
+{
+  // 是否启用缓存
+  cache: true,
+  // 是否监听改动
+  watch: true
+}
+
+// 示例
+getEntry('./src/pages.js', {
+  cache: false
+})
 ```
 
 ## Tips

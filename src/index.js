@@ -1,27 +1,62 @@
 const fs = require('fs');
 const utils = require('./utils');
 
-function getEntry(...arg) {
-  // 获取各文件的绝对路径
-  const paths = {
-    pages: utils.resolveApp(arg[0]),
-    bakPages: utils.resolveModule('./dist/pages.bak.js'),
-    template: utils.resolveApp(arg[1] || './src/main.js'),
-    bakTemplate: utils.resolveModule('./dist/template.bak.js'),
-    app: utils.resolveApp(arg[2] || './dist/app.json'),
+function getEntry(customPaths, customOptions) {
+  // 默认路径
+  const defaultPaths = {
+    // 页面配置文件
+    pages: utils.resolveApp('./src/pages.js'),
+    // 主入口文件，作为模板
+    template: utils.resolveApp('./src/main.js'),
+    // 项目 dist 目录
+    dist: utils.resolveApp('./dist'),
+    // 各页面入口文件目录
+    entry: utils.resolveModule('./dist'),
+    // 备份文件
+    bakPages: utils.resolveModule('./src/pages.bak.js'),
+    bakTemplate: utils.resolveModule('./src/template.bak.js'),
   };
 
-  let entry = utils.genEntry(paths);
+  // 默认配置
+  const defaultOptions = {
+    // 是否启用缓存
+    cache: true,
+    // 是否监听改动
+    watch: true,
+  };
 
-  // 监听文件
-  fs.watch(paths.pages, () => {
-    utils.resetApp(paths);
-    entry = utils.genEntry(paths);
-  });
-  fs.watch(paths.template, () => {
-    utils.resetApp(paths);
-    entry = utils.genEntry(paths);
-  });
+  // 合并参数
+  const paths = Object.assign({}, defaultPaths, typeof customPaths === 'string' ? {
+    pages: utils.resolveApp(customPaths),
+  } : Object.keys(customPaths).reduce((accumulator, currentKey) => {
+    const currentValue = customPaths[currentKey];
+    return Object.assign({}, accumulator, {
+      [currentKey]: currentValue && utils.resolveApp(currentValue),
+    });
+  }, {}));
+  const options = Object.assign({}, defaultOptions, customOptions);
+
+  // 移除备份文件
+  if (!options.cache) {
+    const { bakPages, bakTemplate } = paths;
+    if (fs.existsSync(bakPages)) fs.unlinkSync(bakPages);
+    if (fs.existsSync(bakTemplate)) fs.unlinkSync(bakTemplate);
+  }
+
+  // 生成入口
+  let entry = utils.genEntry(paths, options);
+
+  if (options.watch) {
+    // 监听文件
+    fs.watch(paths.pages, () => {
+      utils.resetApp(paths);
+      entry = utils.genEntry(paths, options);
+    });
+    fs.watch(paths.template, () => {
+      utils.resetApp(paths);
+      entry = utils.genEntry(paths, options);
+    });
+  }
 
   return () => entry;
 }

@@ -42,7 +42,7 @@ function isConfigChanged(page, oldPages) {
   return keys.some(key => page.config[key] !== oldPage.config[key]);
 }
 
-function genEntry(paths) {
+function genEntry(paths, options) {
   // 获取所有新旧页面的配置
   let pages = require(paths.pages);
   let oldPages = fs.existsSync(paths.bakPages) ? require(paths.bakPages) : [];
@@ -82,7 +82,7 @@ function genEntry(paths) {
     const fileName = page.name || pagePath.replace(/\/(\w)/g, ($0, $1) => $1.toUpperCase());
 
     // 入口文件的完整路径
-    const entryPath = resolveModule(`./dist/${fileName}.js`);
+    const entryPath = path.join(paths.entry, `${fileName}.js`);
 
     entry[pagePath] = entryPath;
 
@@ -97,31 +97,34 @@ function genEntry(paths) {
   });
 
   // 备份文件
-  Promise.all(queue).then(() => {
-    // 备份页面配置文件
-    const configReadStream = fs.createReadStream(paths.pages);
-    const configWriteStream = fs.createWriteStream(paths.bakPages);
-    configReadStream.pipe(configWriteStream);
-    // 备份入口模板文件
-    writeFile(paths.bakTemplate, template);
-  });
+  if (options.cache) {
+    Promise.all(queue).then(() => {
+      // 备份页面配置文件
+      const configReadStream = fs.createReadStream(paths.pages);
+      const configWriteStream = fs.createWriteStream(paths.bakPages);
+      configReadStream.pipe(configWriteStream);
+      // 备份入口模板文件
+      writeFile(paths.bakTemplate, template);
+    });
+  }
 
   return entry;
 }
 
 // 重置配置文件
 function resetApp(paths) {
-  const app = require(paths.app);
+  const appPath = path.join(paths.dist, 'app.json');
+  const app = require(appPath);
   const pages = require(paths.pages);
   if (!Array.isArray(pages) || !app.pages) return;
   const firstPage = app.pages[0];
   app.pages = [];
-  pages.forEach(page => {
+  pages.forEach((page) => {
     const pagePath = page.path.replace(/^\//, '');
     if (pagePath !== firstPage) {
-      app.pages.push(pagePath)
+      app.pages.push(pagePath);
     } else {
-      app.pages.unshift(pagePath)
+      app.pages.unshift(pagePath);
     }
   });
   writeFile(paths.app, JSON.stringify(app, null, '  '));
