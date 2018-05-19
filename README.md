@@ -4,8 +4,8 @@
 
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
-[![Build Status](https://travis-ci.org/F-loat/mpvue-entry.svg?branch=v0.x)](https://travis-ci.org/F-loat/mpvue-entry)
-[![codecov](https://codecov.io/gh/F-loat/mpvue-entry/branch/v0.x/graph/badge.svg)](https://codecov.io/gh/F-loat/mpvue-entry)
+[![Build Status](https://travis-ci.org/F-loat/mpvue-entry.svg?branch=master)](https://travis-ci.org/F-loat/mpvue-entry)
+[![codecov](https://codecov.io/gh/F-loat/mpvue-entry/branch/master/graph/badge.svg)](https://codecov.io/gh/F-loat/mpvue-entry)
 
 ## 目录结构
 
