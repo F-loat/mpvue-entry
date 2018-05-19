@@ -3,6 +3,7 @@ module.exports = {
   extends: 'airbnb-base',
   env: {
     'node': true,
+    'mocha': true,
   },
   rules: {
     'import/no-dynamic-require': 0,

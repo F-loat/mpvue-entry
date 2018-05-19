@@ -26,7 +26,7 @@ describe('utils', () => {
       path: '/test/a',
     }, {
       path: '/test/b',
-      }];
+    }];
     const pageA = {
       path: '/test/a',
     };
@@ -60,15 +60,15 @@ describe('utils', () => {
       const tempPath = resolveTest('./temp');
       if (!fs.existsSync(tempPath)) fs.mkdirSync(tempPath);
       const entry = utils.genEntry(paths, options);
-      assert.equal(entry['app'], resolveTest('./assets/main.js'));
+      assert.equal(entry.app, resolveTest('./assets/main.js'));
       assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
     });
     it('should return entry object directly', () => {
       const entry = utils.genEntry(paths, options);
-      assert.equal(entry['app'], resolveTest('./assets/main.js'));
+      assert.equal(entry.app, resolveTest('./assets/main.js'));
       assert.equal(entry['pages/b'], resolveTest('./temp/pageB.js'));
       rimraf(resolveTest('./temp'), (err) => {
-        if (err) console.log(err);
+        if (err) throw err;
       });
     });
   });

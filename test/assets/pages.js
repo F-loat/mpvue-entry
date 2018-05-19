@@ -3,14 +3,14 @@ module.exports = [
     path: '/pages/a',
     name: 'pageA',
     config: {
-      enablePullDownRefresh: true
-    }
+      enablePullDownRefresh: true,
+    },
   },
   {
     path: '/pages/b',
     name: 'pageB',
     config: {
-      navigationBarTitleText: 'Page B'
-    }
-  }
-]
+      navigationBarTitleText: 'Page B',
+    },
+  },
+];

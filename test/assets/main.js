@@ -1,24 +1,24 @@
-import Vue from 'vue'
-import store from '@/store'
-import mixin from '@/mixin'
-import App from '@/App'
+import Vue from 'vue';
+import store from '@/store';
+import mixin from '@/mixin';
+import App from '@/App';
 
-Vue.config.productionTip = false
-Vue.mixin(mixin)
+Vue.config.productionTip = false;
+Vue.mixin(mixin);
 
 const app = new Vue({
   store,
-  ...App
-})
-app.$mount()
+  ...App,
+});
+app.$mount();
 
 export default {
   config: {
     pages: [
-      '^pages/news/list'
+      '^pages/news/list',
     ],
     window: {
-      backgroundTextStyle: 'light'
-    }
-  }
-}
+      backgroundTextStyle: 'light',
+    },
+  },
+};

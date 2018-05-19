@@ -28,7 +28,7 @@ describe('index', () => {
       const entry = MpvueEntry.getEntry(paths, options);
       assert.equal(typeof entry, 'function');
       rimraf(tempPath, (err) => {
-        if (err) console.log(err);
+        if (err) throw err;
       });
     });
   });
