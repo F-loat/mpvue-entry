@@ -44,7 +44,7 @@ module.exports = {
   entry: MpvueEntry.getEntry('./src/pages.js'),
   ...
   plugins: [
-    new MpvueEntry()
+    new MpvueEntry() // 启用插件可支持新增页面热更新
   ]
 }
 ```
@@ -157,6 +157,7 @@ App.mpType = 'app'
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
+  entry: MpvueEntry.getEntry('./src/pages.js', { plugin: false }),
   ...
   module: {
     rules: [
