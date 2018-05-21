@@ -21,40 +21,17 @@ describe('utils', () => {
     });
   });
 
-  describe('isConfigChanged', () => {
-    const oldPages = [{
-      path: '/test/a',
-    }, {
-      path: '/test/b',
-    }];
-    const pageA = {
-      path: '/test/a',
-    };
-    const pageB = {
-      path: '/test/b',
-      config: {
-        enablePullDownRefresh: true,
-      },
-    };
-    it('should return false when the config is present', () => {
-      assert.equal(utils.isConfigChanged(pageA, oldPages), false);
-    });
-    it('should return true when the config is not present', () => {
-      assert.equal(utils.isConfigChanged(pageB, oldPages), true);
-    });
-  });
-
   describe('genEntry', () => {
     const paths = {
       pages: resolveTest('./assets/pages.js'),
       template: resolveTest('./assets/main.js'),
       dist: resolveTest('../dist'),
       entry: resolveTest('./temp'),
-      bakPages: resolveTest('./temp/pages.bak.js'),
+      bakPages: resolveTest('./temp/pages.bak.json'),
       bakTemplate: resolveTest('./temp/template.bak.js'),
     };
     const options = {
-      cache: true,
+      watch: false,
     };
     it('should return entry object', () => {
       const tempPath = resolveTest('./temp');
