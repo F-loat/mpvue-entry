@@ -61,10 +61,8 @@ class MpvueEntry {
 
     if (options.watch) {
       // 监听文件
-      fs.watch(paths.pages, () => {
-        entry = utils.genEntry(paths, options);
-      });
-      fs.watch(paths.template, () => {
+      const { pages, template } = paths;
+      utils.watchFile([pages, template], () => {
         entry = utils.genEntry(paths, options);
       });
     }
