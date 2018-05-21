@@ -22,7 +22,7 @@ const paths = {
   // 各页面入口文件目录
   entry: utils.resolveModule('./dist'),
   // 备份文件
-  bakPages: utils.resolveModule('./src/pages.bak.js'),
+  bakPages: utils.resolveModule('./src/pages.bak.json'),
   bakTemplate: utils.resolveModule('./src/template.bak.js'),
 };
 
@@ -69,9 +69,7 @@ class MpvueEntry {
       });
     }
 
-    if (!options.plugin) {
-      return entry;
-    }
+    if (!options.plugin) return entry;
 
     return () => entry;
   }

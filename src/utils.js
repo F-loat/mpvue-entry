@@ -16,7 +16,7 @@ function writeFile(file, data) {
   return new Promise((resolve, reject) => {
     fs.writeFile(file, data, (err) => {
       if (err) reject(err);
-      resolve();
+      resolve(true);
     });
   });
 }
@@ -98,11 +98,10 @@ function genEntry(paths, options) {
 
   // 备份文件
   if (options.cache) {
-    Promise.all(queue).then(() => {
+    Promise.all(queue).then((results) => {
+      if (results.every(result => !result)) return;
       // 备份页面配置文件
-      const configReadStream = fs.createReadStream(paths.pages);
-      const configWriteStream = fs.createWriteStream(paths.bakPages);
-      configReadStream.pipe(configWriteStream);
+      writeFile(paths.bakPages, JSON.stringify(pages, null, '  '));
       // 备份入口模板文件
       writeFile(paths.bakTemplate, template);
     });
