@@ -1,6 +1,6 @@
 # mpvue-entry
 
->通过配置文件自动生成各页面对应的 main.js 文件，并返回 entry，已完全支持热更新
+> 集中式页面配置，自动生成各页面的入口文件，优化目录结构，支持新增页面热更新
 
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
@@ -41,7 +41,7 @@ npm i mpvue-entry -D
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: MpvueEntry.getEntry('./src/pages.js'),
+  entry: MpvueEntry.getEntry('src/pages.js'),
   ...
   plugins: [
     new MpvueEntry() // 启用插件可支持新增页面热更新
@@ -53,7 +53,7 @@ module.exports = {
 // pages.js
 module.exports = [
   {
-    path: '/pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径
+    path: 'pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径
     config: { // 页面配置，即 page.json 的内容
       navigationBarTitleText: '文章列表',
       enablePullDownRefresh: true
@@ -65,10 +65,10 @@ module.exports = [
 ## 参数
 
 ``` js
-MpvueEntry.getEntry(paths, options)
+MpvueEntry.getEntry(paths[, options])
 ```
 
-* paths [String/Object]
+* paths `String/Object`
 
 paths 为 String 类型时作为 pages 的值，自定义值均相对于项目根目录
 
@@ -76,26 +76,26 @@ paths 为 String 类型时作为 pages 的值，自定义值均相对于项目�
 // 默认值
 {
   // 页面配置文件
-  pages: utils.resolveApp('./src/pages.js'),
+  pages: 'src/pages.js',
   // 主入口文件，作为模板
-  template: utils.resolveApp('./src/main.js'),
+  template: 'src/main.js',
   // 项目 dist 目录
-  dist: utils.resolveApp('./dist'),
+  dist: 'dist/',
   // 各页面入口文件目录
-  entry: utils.resolveModule('./dist'),
+  entry: 'mpvue-entry/dist/',
   // 备份文件
-  bakPages: utils.resolveModule('./src/pages.bak.js'),
-  bakTemplate: utils.resolveModule('./src/template.bak.js')
+  bakPages: 'mpvue-entry/src/pages.bak.js',
+  bakTemplate: 'mpvue-entry/src/template.bak.js'
 }
 
 // 示例
 MpvueEntry.getEntry({
-  pages: './src/router/index.js',
-  dist: './app',
+  pages: 'src/router/index.js',
+  dist: 'app',
 })
 ```
 
-* options [Object]
+* options `Object`
 
 ``` js
 // 默认值
@@ -109,7 +109,7 @@ MpvueEntry.getEntry({
 }
 
 // 示例
-MpvueEntry.getEntry('./src/pages.js', {
+MpvueEntry.getEntry('src/pages.js', {
   cache: false
 })
 ```
@@ -122,8 +122,8 @@ MpvueEntry.getEntry('./src/pages.js', {
 // pages.js
 module.exports = [
   {
-    path: '/pages/news/list', // 首页
-    path: '/pages/news/detail'
+    path: 'pages/news/list', // 首页
+    path: 'pages/news/detail'
   }
 ]
 ```
@@ -150,14 +150,16 @@ export default {
 App.mpType = 'app'
 ```
 
-* 若不启用插件需自行修改 rule 配置
+* path 属性兼容绝对路径，例如 `/pages/news/list`
+
+* 若不启用插件需自行修改 `rule` 配置，并将 `plugin` 选项设置为 `false`
 
 ``` js
 // webpack.base.conf.js
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: MpvueEntry.getEntry('./src/pages.js', { plugin: false }),
+  entry: MpvueEntry.getEntry('src/pages.js', { plugin: false }),
   ...
   module: {
     rules: [
