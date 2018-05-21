@@ -1,4 +1,3 @@
-const fs = require('fs');
 const SingleEntryPlugin = require('webpack/lib/SingleEntryPlugin');
 const MultiEntryPlugin = require('webpack/lib/MultiEntryPlugin');
 const DynamicEntryPlugin = require('./plugins/DynamicEntry');
@@ -52,8 +51,7 @@ class MpvueEntry {
     // 移除备份文件
     if (!options.cache) {
       const { bakPages, bakTemplate } = paths;
-      if (fs.existsSync(bakPages)) fs.unlinkSync(bakPages);
-      if (fs.existsSync(bakTemplate)) fs.unlinkSync(bakTemplate);
+      utils.removeFile([bakPages, bakTemplate]);
     }
 
     // 生成入口

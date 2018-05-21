@@ -32,6 +32,13 @@ function writeFile(file, data) {
   });
 }
 
+// 文件移除函数
+function removeFile(files) {
+  [].concat(files).forEach((file) => {
+    if (fs.existsSync(file)) fs.unlinkSync(file);
+  });
+}
+
 // 重置配置文件
 function resetApp(paths) {
   const appPath = path.join(paths.dist, 'app.json');
@@ -142,6 +149,7 @@ module.exports = {
   resolveModule,
   watchFile,
   writeFile,
+  removeFile,
   genEntry,
   resetApp,
 };
