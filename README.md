@@ -116,7 +116,7 @@ MpvueEntry.getEntry('./src/pages.js', {
 
 ## Tips
 
-* 首页配置以 `main.js` 为主，若 `main.js` 中未配置则为 `pages.js` 里的第一个页面
+* 首页为 `pages.js` 里的第一个页面，会忽略 `main.js` 中的配置
 
 ``` js
 // pages.js

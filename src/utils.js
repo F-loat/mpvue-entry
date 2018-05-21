@@ -114,19 +114,14 @@ function genEntry(paths, options) {
 // 重置配置文件
 function resetApp(paths) {
   const appPath = path.join(paths.dist, 'app.json');
+
   const app = require(appPath);
   const pages = require(paths.pages);
+
   if (!Array.isArray(pages) || !app.pages) return;
-  const firstPage = app.pages[0];
-  app.pages = [];
-  pages.forEach((page) => {
-    const pagePath = page.path.replace(/^\//, '');
-    if (pagePath !== firstPage) {
-      app.pages.push(pagePath);
-    } else {
-      app.pages.unshift(pagePath);
-    }
-  });
+
+  app.pages = pages.map(page => page.path.replace(/^\//, ''));
+
   writeFile(appPath, JSON.stringify(app, null, '  '));
 }
 
