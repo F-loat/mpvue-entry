@@ -81,7 +81,7 @@ class MpvueEntry {
     // 添加解析配置
     compiler.options.module.rules.push({
       test: /\.js$/,
-      include: [/mpvue-entry/],
+      include: /mpvue-entry/,
       use: [
         'babel-loader',
         {
