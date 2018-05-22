@@ -101,11 +101,11 @@ MpvueEntry.getEntry({
 // 默认值
 {
   // 是否启用缓存
-  cache: true,
+  cache: process.env.NODE_ENV !== 'production',
   // 是否监听改动
-  watch: true,
-  // 是否启用插件
-  plugin: true
+  watch: process.env.NODE_ENV !== 'production',
+  // 是否使用动态入口（需配合插件使用）
+  dynamic: process.env.NODE_ENV !== 'production',
 }
 
 // 示例
@@ -152,14 +152,14 @@ App.mpType = 'app'
 
 * path 属性兼容绝对路径，例如 `/pages/news/list`
 
-* 若不启用插件需自行修改 `rule` 配置，并将 `plugin` 选项设置为 `false`
+* 若不启用插件需自行修改 `rule` 配置，并将 `dynamic` 选项设置为 `false`
 
 ``` js
 // webpack.base.conf.js
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: MpvueEntry.getEntry('src/pages.js', { plugin: false }),
+  entry: MpvueEntry.getEntry('src/pages.js', { dynamic: false }),
   ...
   module: {
     rules: [
