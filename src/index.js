@@ -20,8 +20,8 @@ const paths = {
   // 各页面入口文件目录
   entry: resolveModule('./dist'),
   // 备份文件
-  bakPages: resolveModule('./src/pages.bak.json'),
-  bakTemplate: resolveModule('./src/template.bak.js'),
+  bakPages: resolveModule('./dist/pages.bak.json'),
+  bakTemplate: resolveModule('./dist/template.bak.js'),
 };
 
 // 默认配置

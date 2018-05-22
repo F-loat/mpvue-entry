@@ -84,8 +84,8 @@ paths 为 String 类型时作为 pages 的值，自定义值均相对于项目�
   // 各页面入口文件目录
   entry: 'mpvue-entry/dist/',
   // 备份文件
-  bakPages: 'mpvue-entry/src/pages.bak.json',
-  bakTemplate: 'mpvue-entry/src/template.bak.js'
+  bakPages: 'mpvue-entry/dist/pages.bak.json',
+  bakTemplate: 'mpvue-entry/dist/template.bak.js'
 }
 
 // 示例
