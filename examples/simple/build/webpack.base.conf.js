@@ -10,7 +10,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  entry: MpvueEntry.getEntry('./src/pages.js'),
+  entry: MpvueEntry.getEntry('src/pages.js'),
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
@@ -37,7 +37,7 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src')],
+        include: resolve('src'),
         options: {
           formatter: require('eslint-friendly-formatter')
         }
@@ -49,7 +49,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: [resolve('src'), resolve('node_modules/mpvue-entry')],
+        include: resolve('src'),
         use: [
           'babel-loader',
           {
