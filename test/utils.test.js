@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 const assert = require('assert');
-const utils = require('../src/utils');
+const utils = require('../lib/utils');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);

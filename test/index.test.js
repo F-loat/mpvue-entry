@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 const assert = require('assert');
-const MpvueEntry = require('../src');
+const MpvueEntry = require('../lib');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);
