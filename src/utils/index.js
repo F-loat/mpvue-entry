@@ -1,43 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-
-// 项目内文件绝对路径获取函数
-function resolveApp(dir) {
-  return path.join(path.dirname(require.main.filename), '..', dir);
-}
-
-// 输出文件绝对路径获取函数
-function resolveModule(dir) {
-  return path.join(__dirname, '..', dir);
-}
-
-// 文件监听函数
-function watchFile(files, cb) {
-  [].concat(files).forEach((file) => {
-    let timer = null;
-    fs.watch(file, () => {
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(cb, 50);
-    });
-  });
-}
-
-// 文件写入函数
-function writeFile(file, data) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(file, data, (err) => {
-      if (err) reject(err);
-      resolve(true);
-    });
-  });
-}
-
-// 文件移除函数
-function removeFile(files) {
-  [].concat(files).forEach((file) => {
-    if (fs.existsSync(file)) fs.unlinkSync(file);
-  });
-}
+const { watchFile, writeFile, removeFile } = require('./file');
+const { resolveApp, resolveModule } = require('./resolve');
+const { isConfigChanged } = require('./equal');
+const { itemToPlugin, DynamicEntryPlugin } = require('./plugin');
 
 // 重置配置文件
 function resetApp(paths) {
@@ -55,27 +21,7 @@ function resetApp(paths) {
   writeFile(appPath, JSON.stringify(app, null, '  '));
 }
 
-// 配置对比函数
-function isConfigChanged(page, oldPages) {
-  // 获取备份的页面索引
-  const oldPageIndex = oldPages.findIndex(oldPage => oldPage.path === page.path);
-
-  // 不存在备份配置说明为新增页面
-  if (oldPageIndex === -1) return true;
-
-  // 获取并移除备份的页面配置
-  const oldPage = oldPages.splice(oldPageIndex, 1)[0];
-
-  // 对比新旧配置的键
-  const keys = Object.keys(page.config || {});
-  const oldKeys = Object.keys(oldPage.config || {});
-
-  if (keys.length !== oldKeys.length) return true;
-
-  // 对比新旧配置的值
-  return keys.some(key => page.config[key] !== oldPage.config[key]);
-}
-
+// 生成入口文件
 function genEntry(paths, options) {
   // 获取所有新旧页面的配置
   const pages = require(paths.pages);
@@ -152,4 +98,6 @@ module.exports = {
   removeFile,
   genEntry,
   resetApp,
+  itemToPlugin,
+  DynamicEntryPlugin,
 };
