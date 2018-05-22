@@ -1,16 +1,17 @@
 {
   "name": "mpvue-entry",
   "version": "1.1.3",
-  "description": "通过配置文件自动生成各页面对应的 main.js 文件，并返回 entry",
+  "description": "集中式页面配置，自动生成各页面的入口文件，优化目录结构，支持新增页面热更新",
   "main": "src/index.js",
-  "directories": {
-    "example": "examples"
-  },
   "scripts": {
     "lint": "eslint --format node_modules/eslint-friendly-formatter --ext .js .",
     "test": "mocha --harmony",
     "test:cover": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter --harmony"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/F-loat/mpvue-entry.git"
