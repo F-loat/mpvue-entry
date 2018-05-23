@@ -36,12 +36,12 @@ describe('utils', () => {
     it('should return entry object', () => {
       const tempPath = resolveTest('./temp');
       if (!fs.existsSync(tempPath)) fs.mkdirSync(tempPath);
-      const entry = utils.genEntry(paths, options);
+      const entry = utils.genEntry(paths);
       assert.equal(entry.app, resolveTest('./assets/main.js'));
       assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
     });
     it('should return entry object directly', () => {
-      const entry = utils.genEntry(paths, options);
+      const entry = utils.genEntry(paths);
       assert.equal(entry.app, resolveTest('./assets/main.js'));
       assert.equal(entry['pages/b'], resolveTest('./temp/pageB.js'));
       rimraf(resolveTest('./temp'), (err) => {
