@@ -30,22 +30,21 @@ describe('utils', () => {
       bakPages: resolveTest('./temp/pages.bak.json'),
       bakTemplate: resolveTest('./temp/template.bak.js'),
     };
-    const options = {
-      watch: false,
-    };
     it('should return entry object', () => {
       const tempPath = resolveTest('./temp');
       if (!fs.existsSync(tempPath)) fs.mkdirSync(tempPath);
-      const entry = utils.genEntry(paths);
-      assert.equal(entry.app, resolveTest('./assets/main.js'));
-      assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
+      Promise.resolve(utils.genEntry(paths)).then((entry) => {
+        assert.equal(entry.app, resolveTest('./assets/main.js'));
+        assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
+      });
     });
     it('should return entry object directly', () => {
-      const entry = utils.genEntry(paths);
-      assert.equal(entry.app, resolveTest('./assets/main.js'));
-      assert.equal(entry['pages/b'], resolveTest('./temp/pageB.js'));
-      rimraf(resolveTest('./temp'), (err) => {
-        if (err) throw err;
+      Promise.resolve(utils.genEntry(paths)).then((entry) => {
+        assert.equal(entry.app, resolveTest('./assets/main.js'));
+        assert.equal(entry['pages/b'], resolveTest('./temp/pageB.js'));
+        rimraf(resolveTest('./temp'), (err) => {
+          if (err) throw err;
+        });
       });
     });
   });
