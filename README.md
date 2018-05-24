@@ -65,7 +65,7 @@ module.exports = [
 ## 参数
 
 ``` js
-MpvueEntry.getEntry(paths[, options])
+MpvueEntry.getEntry(paths)
 ```
 
 * paths `String/Object`
@@ -79,36 +79,16 @@ paths 为 String 类型时作为 pages 的值，自定义值均相对于项目�
   pages: 'src/pages.js',
   // 主入口文件，作为模板
   template: 'src/main.js',
-  // 项目 dist 目录
-  dist: 'dist/',
+  // 项目配置文件
+  app: 'dist/app.json',
   // 各页面入口文件目录
-  entry: 'mpvue-entry/dist/',
-  // 备份文件
-  bakPages: 'mpvue-entry/dist/pages.bak.json',
-  bakTemplate: 'mpvue-entry/dist/template.bak.js'
+  entry: 'mpvue-entry/dist/'
 }
 
 // 示例
 MpvueEntry.getEntry({
   pages: 'src/router/index.js',
-  dist: 'app',
-})
-```
-
-* options `Object`
-
-``` js
-// 默认值
-{
-  // 是否启用缓存
-  cache: process.env.NODE_ENV !== 'production',
-  // 是否监听改动
-  watch: process.env.NODE_ENV !== 'production'
-}
-
-// 示例
-MpvueEntry.getEntry('src/pages.js', {
-  cache: false
+  app: 'wxapp/app.json',
 })
 ```
 

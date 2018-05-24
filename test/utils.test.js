@@ -1,8 +1,8 @@
-const fs = require('fs');
 const path = require('path');
-const rimraf = require('rimraf');
 const assert = require('assert');
-const utils = require('../lib/utils');
+const { resolveApp, resolveModule } = require('../lib/utils/resolve');
+const { genEntry } = require('../lib/utils/compiler');
+const { removeFile } = require('../lib/utils/file');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);
@@ -11,13 +11,13 @@ function resolveTest(dir) {
 describe('utils', () => {
   describe('resolveApp', () => {
     it('should return a path relative to app', () => {
-      assert.equal(utils.resolveApp('./test'), resolveTest('../node_modules/mocha/test'));
+      assert.equal(resolveApp('./test'), resolveTest('../node_modules/mocha/test'));
     });
   });
 
   describe('resolveModule', () => {
     it('should return a path relative to module', () => {
-      assert.equal(utils.resolveModule('./test'), resolveTest('.'));
+      assert.equal(resolveModule('./test'), resolveTest('.'));
     });
   });
 
@@ -25,26 +25,14 @@ describe('utils', () => {
     const paths = {
       pages: resolveTest('./assets/pages.js'),
       template: resolveTest('./assets/main.js'),
-      dist: resolveTest('../dist'),
-      entry: resolveTest('./temp'),
-      bakPages: resolveTest('./temp/pages.bak.json'),
-      bakTemplate: resolveTest('./temp/template.bak.js'),
+      app: resolveTest('../dist/app.json'),
+      entry: resolveTest('./'),
     };
     it('should return entry object', () => {
-      const tempPath = resolveTest('./temp');
-      if (!fs.existsSync(tempPath)) fs.mkdirSync(tempPath);
-      Promise.resolve(utils.genEntry(paths)).then((entry) => {
+      genEntry(paths, 'initial').then((entry) => {
         assert.equal(entry.app, resolveTest('./assets/main.js'));
-        assert.equal(entry['pages/a'], resolveTest('./temp/pageA.js'));
-      });
-    });
-    it('should return entry object directly', () => {
-      Promise.resolve(utils.genEntry(paths)).then((entry) => {
-        assert.equal(entry.app, resolveTest('./assets/main.js'));
-        assert.equal(entry['pages/b'], resolveTest('./temp/pageB.js'));
-        rimraf(resolveTest('./temp'), (err) => {
-          if (err) throw err;
-        });
+        assert.equal(entry['pages/a'], resolveTest('./pagesA.js'));
+        removeFile([entry['pages/a'], entry['pages/b']]);
       });
     });
   });
