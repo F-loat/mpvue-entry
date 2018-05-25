@@ -134,3 +134,7 @@ App.mpType = 'app'
 
 * [基础用法](./examples/simple)
 * [配置文件复用](./examples/vue-router)
+
+## Thanks
+
+* [webpack-watched-glob-entries-plugin](https://github.com/Milanzor/webpack-watched-glob-entries-plugin)
