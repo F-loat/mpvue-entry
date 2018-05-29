@@ -30,6 +30,14 @@
 
 以 `src/main.js` 为模板，使用配置文件中的 `path` 及 `config` 属性分别替换 `vue 文件导入路径` 及 `导出信息`
 
+## Quickstart
+
+> https://github.com/F-loat/mpvue-quickstart
+
+``` bash
+vue init F-loat/mpvue-quickstart my-project
+```
+
 ## 安装
 
 ``` bash
