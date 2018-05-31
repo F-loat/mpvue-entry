@@ -144,7 +144,7 @@ App.mpType = 'app'
 ``` js
 console.log('hello world') // app-only
 
-/* app-only-start */
+/* app-only-begin */
 console.log('happy')
 console.log('coding')
 /* app-only-end */
