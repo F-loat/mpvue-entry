@@ -54,7 +54,8 @@ module.exports = {
   entry: MpvueEntry.getEntry('src/pages.js'),
   ...
   plugins: [
-    new MpvueEntry() // 启用插件可支持新增页面热更新
+    new MpvueEntry(),
+    ...
   ]
 }
 ```
@@ -116,7 +117,7 @@ module.exports = [
 ]
 ```
 
-* 在 `src/main.js` 中引用文件时需通过 `@` 标识引用
+* 在 `main.js` 中引用文件时需通过 `@` 标识引用
 
 ``` js
 // 正确
@@ -126,7 +127,7 @@ import App from '@/App'
 import App from './App'
 ```
 
-* 需在 `src/App.vue` 或 `src/main.js` 中指定 `mpType` 为 `app`
+* 需在 `App.vue` 或 `main.js` 中指定 `mpType` 为 `app`
 
 ``` js
 // App.vue
@@ -138,18 +139,18 @@ export default {
 App.mpType = 'app'
 ```
 
-* 各页面的入口文件默认保留 `main.js` 中除 `export default {[^]*}` 及 `Mixin` 语句外所有代码，可通过以下形式的注释额外指定 `src/main.js` 特有代码
+* 各页面的入口文件默认保留 `main.js` 中除 `export default {[^]*}` 及 `Mixin` 语句外所有代码，可通过以下形式的注释额外指定 `main.js` 特有代码
 
 ``` js
 console.log('hello world') // app-only
 
-// app-only-start
+/* app-only-start */
 console.log('happy')
 console.log('coding')
-// app-only-end
+/* app-only-end */
 ```
 
-* path 属性兼容绝对路径，例如 `/pages/news/list`
+* `path` 属性兼容绝对路径，例如 `/pages/news/list`
 
 ## 示例
 
