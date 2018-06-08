@@ -154,7 +154,7 @@ console.log('coding')
 // pages.js
 module.exports = [
   {
-    path: 'pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径，必填
+    path: 'pages/news/list',
     native: true
   }
 ]
