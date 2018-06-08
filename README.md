@@ -64,8 +64,8 @@ module.exports = {
 // pages.js
 module.exports = [
   {
-    path: 'pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径
-    config: { // 页面配置，即 page.json 的内容
+    path: 'pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径，必填
+    config: { // 页面配置，即 page.json 的内容，可选
       navigationBarTitleText: '文章列表',
       enablePullDownRefresh: true
     }
@@ -112,6 +112,7 @@ MpvueEntry.getEntry({
 module.exports = [
   {
     path: 'pages/news/list', // 首页
+  }, {
     path: 'pages/news/detail'
   }
 ]
@@ -148,6 +149,18 @@ console.log('hello world') // app-only
 console.log('happy')
 console.log('coding')
 /* app-only-end */
+```
+
+* 可通过 `native` 属性指定页面为原生开发，不做编译处理
+
+``` js
+// pages.js
+module.exports = [
+  {
+    path: 'pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径，必填
+    native: true
+  }
+]
 ```
 
 * `path` 属性兼容绝对路径，例如 `/pages/news/list`
