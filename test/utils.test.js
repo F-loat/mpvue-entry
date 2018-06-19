@@ -1,7 +1,8 @@
 const path = require('path');
 const assert = require('assert');
+const Template = require('../lib/utils/template');
+const genEntry = require('../lib/utils/compiler');
 const { resolveApp, resolveModule } = require('../lib/utils/resolve');
-const { genEntry } = require('../lib/utils/compiler');
 const { removeFile } = require('../lib/utils/file');
 
 function resolveTest(dir) {
@@ -18,6 +19,36 @@ describe('utils', () => {
   describe('resolveModule', () => {
     it('should return a path relative to module', () => {
       assert.equal(resolveModule('./test'), resolveTest('.'));
+    });
+  });
+
+  describe('template', () => {
+    it('should return template string', () => {
+      const template = new Template();
+      template.refresh(resolveTest('./assets/main.js'));
+      assert.equal(template.content, `import Vue from 'vue';
+import store from '@/store';
+import App from '@/App';
+
+Vue.config.productionTip = false;
+
+const app = new Vue({
+  store,
+  ...App,
+});
+app.$mount();
+
+export default {
+  config: {
+    pages: [
+      '^pages/news/list',
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+    },
+  },
+};
+`);
     });
   });
 
