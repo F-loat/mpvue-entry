@@ -105,13 +105,13 @@ MpvueEntry.getEntry({
 
 ## Tips
 
-* 首页为 `pages.js` 里的第一个页面，会忽略 `main.js` 中的配置，且仅指定 `path` 属性时可简写为字符串形式
+* `path` 属性兼容绝对路径，且仅指定 `path` 属性时可简写为字符串形式
 
 ``` js
 // pages.js
 module.exports = [
-  'pages/news/list', // 首页
-  'pages/news/detail'
+  '/pages/news/list',
+  '/pages/news/detail'
 ]
 ```
 
@@ -159,8 +159,6 @@ module.exports = [
   }
 ]
 ```
-
-* `path` 属性兼容绝对路径，例如 `/pages/news/list`
 
 ## 示例
 
