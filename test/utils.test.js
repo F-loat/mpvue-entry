@@ -25,7 +25,7 @@ describe('utils', () => {
   describe('template', () => {
     it('should return template string', () => {
       const template = new Template();
-      template.refresh(resolveTest('./assets/main.js'));
+      template.refresh({ template: resolveTest('./assets/main.js') });
       assert.equal(template.content, `import Vue from 'vue';
 import store from '@/store';
 import App from '@/App';
@@ -62,7 +62,7 @@ export default {
     it('should return entry object', () => {
       genEntry(paths, 'initial').then((entry) => {
         assert.equal(entry.app, resolveTest('./assets/main.js'));
-        assert.equal(entry['pages/a'], resolveTest('./pagesA.js'));
+        assert.equal(entry['pages/a'], resolveTest('./pageA.js'));
         removeFile([entry['pages/a'], entry['pages/b']]);
       });
     });

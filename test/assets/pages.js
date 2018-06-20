@@ -8,7 +8,6 @@ module.exports = [
   },
   {
     path: '/pages/b',
-    name: 'pageB',
     config: {
       navigationBarTitleText: 'Page B',
     },
