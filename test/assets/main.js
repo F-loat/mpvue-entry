@@ -15,7 +15,7 @@ app.$mount();
 export default {
   config: {
     pages: [
-      '^pages/news/list',
+      '^pages/b',
     ],
     window: {
       backgroundTextStyle: 'light',

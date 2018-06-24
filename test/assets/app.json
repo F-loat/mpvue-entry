@@ -1,0 +1,9 @@
+{
+  "pages": [
+    "pages/b",
+    "pages/a"
+  ],
+  "window": {
+    "backgroundTextStyle": "light"
+  }
+}

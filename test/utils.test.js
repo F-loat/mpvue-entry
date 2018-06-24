@@ -3,7 +3,7 @@ const assert = require('assert');
 const Template = require('../lib/utils/template');
 const genEntry = require('../lib/utils/compiler');
 const { resolveApp, resolveModule } = require('../lib/utils/resolve');
-const { removeFile } = require('../lib/utils/file');
+const { removeFile, resolveFile } = require('../lib/utils/file');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);
@@ -19,6 +19,17 @@ describe('utils', () => {
   describe('resolveModule', () => {
     it('should return a path relative to module', () => {
       assert.equal(resolveModule('./test'), resolveTest('.'));
+    });
+  });
+
+  describe('resolveFile', () => {
+    it('should return a file list', () => {
+      const filePath = resolveTest('./assets/pages.js');
+      const fileList = resolveFile(filePath);
+      assert.equal(fileList.length, 3);
+      assert.equal(fileList[0], filePath);
+      assert.equal(fileList[1], resolveTest('./assets/a.js'));
+      assert.equal(fileList[2], resolveTest('./assets/b.js'));
     });
   });
 
@@ -41,7 +52,7 @@ app.$mount();
 export default {
   config: {
     pages: [
-      '^pages/news/list',
+      '^pages/b',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -56,7 +67,7 @@ export default {
     const paths = {
       pages: resolveTest('./assets/pages.js'),
       template: resolveTest('./assets/main.js'),
-      app: resolveTest('../dist/app.json'),
+      app: resolveTest('./assets/app.json'),
       entry: resolveTest('./'),
     };
     it('should return entry object', () => {
@@ -65,6 +76,7 @@ export default {
         assert.equal(entry['pages/a'], resolveTest('./pageA.js'));
         removeFile([entry['pages/a'], entry['pages/b']]);
       });
+      genEntry(paths, 'pages');
     });
   });
 });

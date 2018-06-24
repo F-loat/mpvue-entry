@@ -1,15 +1,4 @@
-module.exports = [
-  {
-    path: '/pages/a',
-    name: 'pageA',
-    config: {
-      enablePullDownRefresh: true,
-    },
-  },
-  {
-    path: '/pages/b',
-    config: {
-      navigationBarTitleText: 'Page B',
-    },
-  },
-];
+const a = require('./a');
+const b = require('./b');
+
+module.exports = [].concat(a).concat(b);
