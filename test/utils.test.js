@@ -73,7 +73,7 @@ export default {
     it('should return entry object', () => {
       genEntry(paths, 'initial').then((entry) => {
         assert.equal(entry.app, resolveTest('./assets/main.js'));
-        assert.equal(entry['pages/a'], resolveTest('./pageA.js'));
+        assert.equal(entry['pages/a'], resolveTest('./pagesA.js'));
         removeFile([entry['pages/a'], entry['pages/b']]);
       });
       genEntry(paths, 'pages');
