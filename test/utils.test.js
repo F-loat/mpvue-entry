@@ -1,7 +1,7 @@
 const path = require('path');
 const assert = require('assert');
-const Template = require('../lib/utils/template');
-const genEntry = require('../lib/utils/compiler');
+const genEntry = require('../lib/compiler');
+const { Template } = require('../lib/parser');
 const { resolveApp, resolveModule } = require('../lib/utils/resolve');
 const { removeFile, resolveFile } = require('../lib/utils/file');
 
