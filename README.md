@@ -115,29 +115,7 @@ module.exports = [
 ]
 ```
 
-* 在 `main.js` 中引用文件时需通过 `@` 标识引用
-
-``` js
-// 正确
-import App from '@/App'
-
-// 错误
-import App from './App'
-```
-
-* 需在 `App.vue` 或 `main.js` 中指定 `mpType` 为 `app`
-
-``` js
-// App.vue
-export default {
-  mpType: 'app'
-}
-
-// 或 main.js
-App.mpType = 'app'
-```
-
-* 各页面的入口文件默认保留 `main.js` 中除 `export default {[^]*}` 及 `Mixin` 语句外所有代码，可通过以下形式的注释额外指定 `main.js` 特有代码
+* 可通过以下形式的注释指定 `main.js` 特有代码
 
 ``` js
 console.log('hello world') // app-only
