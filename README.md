@@ -138,6 +138,33 @@ module.exports = [
 ]
 ```
 
+* 可通过 `subPackage` 属性指定页面需分包加载
+
+``` js
+// pages.js
+module.exports = [
+  {
+    path: 'packageA/news/detail',
+    subPackage: true
+  }
+]
+
+// app.json
+{
+  "pages": [
+    // ...
+  ],
+  "subPackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "news/detail"
+      ]
+    }
+  ]
+}
+```
+
 ## 示例
 
 * [基础用法](./examples/simple)
