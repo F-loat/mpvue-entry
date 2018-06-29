@@ -81,7 +81,7 @@ MpvueEntry.getEntry(paths)
 
 * paths `String/Object`
 
-paths 为 String 类型时作为 pages 的值，自定义值均相对于项目根目录
+paths 为 String 类型时作为 pages 的值，自定义值为绝对路径或相对于项目根目录的相对路径（这里的相对路径实际上是相对于被执行文件的上级目录的）
 
 ``` js
 // 默认值
