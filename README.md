@@ -148,21 +148,6 @@ module.exports = [
     subPackage: true
   }
 ]
-
-// app.json
-{
-  "pages": [
-    // ...
-  ],
-  "subPackages": [
-    {
-      "root": "packageA",
-      "pages": [
-        "news/detail"
-      ]
-    }
-  ]
-}
 ```
 
 ## 示例
