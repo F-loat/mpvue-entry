@@ -34,9 +34,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-import": "^2.11.0",
     "istanbul": "^0.4.5",
-    "mocha": "^5.1.1"
-  },
-  "dependencies": {
+    "mocha": "^5.1.1",
     "webpack": "*"
   }
 }
