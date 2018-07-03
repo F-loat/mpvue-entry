@@ -66,6 +66,7 @@ export default {
   describe('genEntry', () => {
     const paths = {
       pages: resolveTest('./assets/pages.js'),
+      main: resolveTest('./assets/main.js'),
       template: resolveTest('./assets/main.js'),
       app: resolveTest('./assets/app.json'),
       entry: resolveTest('./'),

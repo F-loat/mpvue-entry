@@ -5,7 +5,7 @@ describe('index', () => {
   describe('getEntry', () => {
     const paths = {
       pages: '../../test/assets/pages.js',
-      template: '../../test/assets/main.js',
+      main: '../../test/assets/main.js',
       app: '../../test/dist/app.json',
       entry: '../../test',
     };
