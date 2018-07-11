@@ -107,6 +107,8 @@ MpvueEntry.getEntry({
 
 ## Tips
 
+* 首页默认为 `pages.js` 中的第一项，但会被 `main.js` 中的配置覆盖
+
 * `path` 属性兼容绝对路径，且仅指定 `path` 属性时可简写为字符串形式
 
 ``` js
@@ -140,7 +142,7 @@ module.exports = [
 ]
 ```
 
-* 可通过 `subPackage` 属性指定页面需分包加载
+* 可通过 `subPackage` 属性指定页面需分包加载（配合 [Quickstart](#quickstart) 模板使用效果更佳）
 
 ``` js
 // pages.js
