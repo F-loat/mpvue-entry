@@ -154,6 +154,18 @@ module.exports = [
 ]
 ```
 
+* 可通过 `root` 属性指定分包根路径，指定后 `subPackage` 属性会自动置为 `true`
+
+``` js
+// pages.js
+module.exports = [
+  {
+    path: 'pages/news/detail',
+    root: 'pages/news'
+  }
+]
+```
+
 ## 示例
 
 * [基础用法](./examples/simple)
