@@ -1,37 +1,31 @@
 module.exports = [
   {
-    alias: '/',
-    path: '/pages/news/list',
-    name: 'NewsList',
+    path: 'pages/news/list',
     config: {
       enablePullDownRefresh: true
     }
   },
   {
-    path: '/pages/news/detail',
-    name: 'NewsDetail',
+    path: 'pages/news/detail',
     config: {
       navigationBarTitleText: '文章详情'
     }
   },
   {
-    path: '/pages/news/comment',
-    name: 'NewsComment',
+    path: 'pages/news/comment',
     config: {
       navigationBarTitleText: '评论列表'
     }
   },
   {
-    path: '/pages/quanzi/list',
-    name: 'QuanziList',
+    path: 'pages/quanzi/list',
     config: {
       navigationBarTitleText: '圈子',
       enablePullDownRefresh: true
     }
   },
   {
-    path: '/pages/quanzi/detail',
-    name: 'QuanziDetail',
+    path: 'pages/quanzi/detail',
     config: {
       navigationBarTitleText: '圈子详情'
     }

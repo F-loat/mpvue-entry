@@ -168,8 +168,10 @@ module.exports = [
 
 ## 示例
 
-* [基础用法](./examples/simple)
-* [配置文件复用](./examples/vue-router)
+> 以 mpvue-loader@1.1.0 为界（其实用法是一样的）
+
+* [新版示例](./examples/current)
+* [旧版示例](./examples/legacy)
 
 ## Thanks
 
