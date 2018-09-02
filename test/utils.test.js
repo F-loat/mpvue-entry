@@ -68,6 +68,7 @@ export default {
       main: resolveTest('./assets/main.js'),
       template: resolveTest('./assets/main.js'),
       app: resolveTest('./assets/app.json'),
+      dist: resolveTest('./assets'),
       entry: resolveTest('./'),
     };
     it('should return entry object', () => {
