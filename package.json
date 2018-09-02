@@ -36,5 +36,8 @@
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
     "webpack": "*"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1"
   }
 }
