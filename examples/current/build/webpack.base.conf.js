@@ -1,9 +1,9 @@
-var path = require('path')
-var utils = require('./utils')
-var config = require('../config')
-var vueLoaderConfig = require('./vue-loader.conf')
-var MpvuePlugin = require('webpack-mpvue-asset-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
+const utils = require('./utils')
+const config = require('../config')
+const vueLoaderConfig = require('./vue-loader.conf')
+const MpvuePlugin = require('webpack-mpvue-asset-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MpvueEntry = require('mpvue-entry')
 
 function resolve (dir) {
@@ -11,10 +11,10 @@ function resolve (dir) {
 }
 
 module.exports = {
-  // 如果要自定义生成的 dist 目录里面的文件路径，
-  // 可以将 entry 写成 {'toPath': 'fromPath'} 的形式，
-  // toPath 为相对于 dist 的路径, 例：index/demo，则生成的文件地址为 dist/index/demo.js
-  entry: MpvueEntry.getEntry('src/pages.js'),
+  entry: MpvueEntry.getEntry({
+    pages: 'src/pages.js',
+    app: 'src/app.json',
+  }),
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
@@ -91,10 +91,6 @@ module.exports = {
   plugins: [
     new MpvuePlugin(),
     new MpvueEntry(),
-    new CopyWebpackPlugin([{
-      from: resolve('./src/main.json'),
-      to: 'app.json'
-    }]),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

@@ -58,6 +58,16 @@ module.exports = {
     ...
   ]
 }
+
+/**
+ * v1.5.0 版本开始支持 mpvue-loader@^1.1.0 版本，
+ * 目前需手动指定 app.json 文件路径，
+ * 预计 v2.0 版本会调整默认值，且不再兼容旧版 mpvue-loader
+ */
+const entry = MpvueEntry.getEntry({
+  pages: 'src/pages.js',
+  app: 'src/app.json'
+})
 ```
 
 ``` js
@@ -91,9 +101,11 @@ paths 为 String 类型时作为 pages 的值，自定义值为绝对路径或�
   // 主入口文件，作为模板
   main: 'src/main.js',
   // 入口模板文件，优先级较高
-  template: undefined,
+  template: 'src/main.js',
   // 项目配置文件
   app: 'dist/app.json',
+  // 项目构建目录
+  dist: 'dist/',
   // 各页面入口文件目录
   entry: 'mpvue-entry/dist/'
 }
@@ -101,7 +113,7 @@ paths 为 String 类型时作为 pages 的值，自定义值为绝对路径或�
 // 示例
 MpvueEntry.getEntry({
   pages: 'src/router/index.js',
-  app: 'wxapp/app.json',
+  dist: 'wxapp/',
 })
 ```
 
@@ -168,7 +180,7 @@ module.exports = [
 
 ## 示例
 
-> 以 mpvue-loader@1.1.0 为界（其实用法是一样的）
+> 以 mpvue-loader@1.1.0 为界
 
 * [新版示例](./examples/current)
 * [旧版示例](./examples/legacy)
