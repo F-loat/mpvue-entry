@@ -46,6 +46,8 @@ npm i mpvue-entry -D
 
 ## 使用
 
+> v1.5.0 版本开始支持 mpvue-loader@^1.1.0 版本，新版 src 目录下需存在 app.json 文件，预计 v2.0 版本不再兼容旧版 mpvue-loader
+
 ``` js
 // webpack.base.conf.js
 const MpvueEntry = require('mpvue-entry')
@@ -58,16 +60,6 @@ module.exports = {
     ...
   ]
 }
-
-/**
- * v1.5.0 版本开始支持 mpvue-loader@^1.1.0 版本，
- * 目前需手动指定 app.json 文件路径，
- * 预计 v2.0 版本会调整默认值，且不再兼容旧版 mpvue-loader
- */
-const entry = MpvueEntry.getEntry({
-  pages: 'src/pages.js',
-  app: 'src/app.json'
-})
 ```
 
 ``` js
@@ -103,7 +95,8 @@ paths 为 String 类型时作为 pages 的值，自定义值为绝对路径或�
   // 入口模板文件，优先级较高
   template: 'src/main.js',
   // 项目配置文件
-  app: 'dist/app.json',
+  app: 'src/app.json', // 新
+  app: 'dist/app.json', // 旧
   // 项目构建目录
   dist: 'dist/',
   // 各页面入口文件目录

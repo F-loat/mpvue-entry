@@ -11,10 +11,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  entry: MpvueEntry.getEntry({
-    pages: 'src/pages.js',
-    app: 'src/app.json',
-  }),
+  entry: MpvueEntry.getEntry('src/pages.js'),
   target: require('mpvue-webpack-target'),
   output: {
     path: config.build.assetsRoot,
