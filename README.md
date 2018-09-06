@@ -11,7 +11,7 @@
 
 ## 目录结构
 
-```
+``` txt
 ├─build
 ├─config
 ├─src
@@ -133,6 +133,18 @@ console.log('hello world') // app-only
 console.log('happy')
 console.log('coding')
 /* app-only-end */
+```
+
+* 可通过 `route` 属性指定页面路由
+
+``` js
+// pages.js
+module.exports = [
+  {
+    path: 'pages/news/list',
+    route: 'pages/news/list/main',
+  }
+]
 ```
 
 * 可通过 `native` 属性指定页面为原生开发，不做编译处理
