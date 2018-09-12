@@ -1,6 +1,6 @@
 {
   "name": "mpvue-entry",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "集中式页面配置，自动生成各页面的入口文件，优化目录结构，支持新增页面热更新",
   "main": "lib/index.js",
   "scripts": {
