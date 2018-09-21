@@ -3,7 +3,7 @@ const assert = require('assert');
 const { genEntry } = require('../lib/compiler');
 const { parseTemplate, parsePages } = require('../lib/parser');
 const { resolveApp, resolveModule } = require('../lib/utils/resolve');
-const { removeFile, resolveFile } = require('../lib/utils/file');
+const { removeFile, resolveFile, isNativeModule } = require('../lib/utils/file');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);
@@ -30,6 +30,17 @@ describe('utils', () => {
       assert.equal(fileList[0], filePath);
       assert.equal(fileList[1], resolveTest('./assets/a.js'));
       assert.equal(fileList[2], resolveTest('./assets/b.js'));
+    });
+  });
+
+  describe('isNativeModule', () => {
+    it('should return true', () => {
+      assert.equal(true, isNativeModule('fs'));
+      assert.equal(true, isNativeModule('path'));
+    });
+    it('should return false', () => {
+      assert.equal(false, isNativeModule('react'));
+      assert.equal(false, isNativeModule('vue'));
     });
   });
 
