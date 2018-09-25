@@ -172,6 +172,8 @@ module.exports = [
 ```
 
 * 可通过 `root` 属性指定分包根路径，指定后 `subPackage` 属性会自动置为 `true`
+* 可通过 `name` 属性指定分包别名，默认为分包目录名称，用于分包预下载时使用
+* 可通过 `independent` 属性指定分包是否是独立分包，默认为非独立分包
 
 ``` js
 // pages.js
