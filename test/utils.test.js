@@ -12,7 +12,7 @@ function resolveTest(dir) {
 describe('utils', () => {
   describe('resolveApp', () => {
     it('should return a path relative to app', () => {
-      assert.equal(resolveApp('./test'), resolveTest('../node_modules/mocha/test'));
+      assert.equal(resolveApp('./test'), resolveTest('.'));
     });
   });
 
