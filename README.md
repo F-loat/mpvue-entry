@@ -30,7 +30,7 @@
 
 以 `src/main.js` 为模板，使用配置文件中的 `path` 及 `config` 属性分别替换 `vue 文件导入路径` 及 `导出信息`
 
-## Quickstart
+## Quickstart*
 
 > https://github.com/F-loat/mpvue-quickstart
 
@@ -73,6 +73,21 @@ module.exports = [
     }
   }
 ]
+```
+
+``` js
+// 官方模板生成的项目请务必去除以下配置
+module.exports = {
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: '**/*.json',
+      to: ''
+    }], {
+      context: 'src/'
+    }),
+    ...
+  ]
+}
 ```
 
 ## 参数
