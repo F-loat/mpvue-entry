@@ -1,5 +1,6 @@
 const path = require('path');
 const assert = require('assert');
+const generate = require('@babel/generator').default;
 const { genEntry } = require('../lib/compiler');
 const { parseTemplate, parsePages } = require('../lib/parser');
 const { resolveApp, resolveModule } = require('../lib/utils/resolve');
@@ -47,29 +48,24 @@ describe('utils', () => {
   describe('template', () => {
     it('should return template string', () => {
       const template = parseTemplate({ template: resolveTest('./assets/main.js') });
-      assert.equal(template, `import Vue from 'vue';
+      const { code } = generate(template);
+      assert.equal(code, `import Vue from 'vue';
 import store from '@/store';
 import App from '@/App';
-
 Vue.config.productionTip = false;
-
 const app = new Vue({
   store,
-  ...App,
+  ...App
 });
 app.$mount();
-
 export default {
   config: {
-    pages: [
-      '^pages/b',
-    ],
+    pages: ['^pages/b'],
     window: {
-      backgroundTextStyle: 'light',
-    },
-  },
-};
-`);
+      backgroundTextStyle: 'light'
+    }
+  }
+};`);
     });
   });
 

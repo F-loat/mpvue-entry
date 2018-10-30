@@ -59,6 +59,7 @@ typings/
 
 #editor
 .idea
+.vscode
 
 #others
 test/assets/pages/*.json

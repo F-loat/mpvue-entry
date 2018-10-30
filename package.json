@@ -1,6 +1,6 @@
 {
   "name": "mpvue-entry",
-  "version": "1.5.8",
+  "version": "2.0.0",
   "description": "集中式页面配置，自动生成各页面的入口文件，优化目录结构，支持新增页面热更新",
   "main": "lib/index.js",
   "scripts": {
@@ -35,10 +35,13 @@
     "eslint-plugin-import": "^2.11.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
-    "webpack": "*",
-    "mpvue-loader": "*"
+    "mpvue-loader": "*",
+    "webpack": "*"
   },
   "dependencies": {
+    "@babel/generator": "^7.1.3",
+    "@babel/parser": "^7.1.3",
+    "@babel/traverse": "^7.1.4",
     "mkdirp": "^0.5.1"
   }
 }
