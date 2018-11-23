@@ -35,10 +35,11 @@
     "eslint-plugin-import": "^2.11.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
-    "webpack": "*",
-    "mpvue-loader": "*"
+    "mpvue-loader": "*",
+    "webpack": "*"
   },
   "dependencies": {
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^0.5.1",
+    "watchr": "^4.0.1"
   }
 }
