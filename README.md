@@ -97,7 +97,7 @@ module.exports = {
 > paths 为 `String` 类型时作为 pages 的值，为绝对路径或相对于项目根目录的相对路径
 
 | property | default | describe |
-| - | - | - |
+| :-: | :-: | :-: |
 | pages | 'src/pages.js' | 页面配置文件 |
 | main | 'src/main.js' | 主入口文件，作为模板 |
 | template | 'src/main.js' | 入口模板文件，优先级较高 |
@@ -118,7 +118,7 @@ MpvueEntry.getEntry({
 > pages 元素为 `String` 类型时作为 path 的值，为绝对路径或相对于项目根目录的相对路径
 
 | property | type | default | describe |
-| - | - | - | - |
+| :-: | :-: | :-: | :-: |
 | path | String | - | 文件路径 |
 | config | Object | {} | 页面配置 |
 | route |String | - | 页面路由 |
