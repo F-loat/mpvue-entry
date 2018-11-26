@@ -125,7 +125,7 @@ MpvueEntry.getEntry({
 | native | Boolean | false | 原生页面 |
 | subPackage | Boolean | false | [分包加载](#quickstart) |
 | root | String | - | 分包根路径 |
-| name | String | 分包目录名称 | 分包别名 |
+| name | String | `root` | 分包别名 |
 | independent | Boolean | false | 独立分包 |
 
 ``` js
