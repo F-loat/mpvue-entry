@@ -75,21 +75,6 @@ module.exports = [
 ]
 ```
 
-``` js
-// 官方模板生成的项目请务必去除以下配置
-module.exports = {
-  plugins: [
-    new CopyWebpackPlugin([{
-      from: '**/*.json',
-      to: ''
-    }], {
-      context: 'src/'
-    }),
-    ...
-  ]
-}
-```
-
 ## 参数
 
 * paths `String/Object`
@@ -154,6 +139,22 @@ console.log('hello world') // app-only
 console.log('happy')
 console.log('coding')
 /* app-only-end */
+```
+
+* 官方模板生成的项目请务必去除以下配置
+``` js
+// webpack.base.conf.js
+module.exports = {
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: '**/*.json',
+      to: ''
+    }], {
+      context: 'src/'
+    }),
+    ...
+  ]
+}
 ```
 
 ## 示例
