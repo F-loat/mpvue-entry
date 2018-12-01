@@ -46,7 +46,7 @@ npm i mpvue-entry -D
 
 ## 使用
 
-> v1.5.0 版本开始支持 mpvue-loader@^1.1.0 版本，新版 src 目录下需存在 app.json 文件，预计 v2.0 版本不再兼容旧版 mpvue-loader
+> v2.0 版本仅支持 mpvue-loader@^1.1.0
 
 ``` js
 // webpack.base.conf.js
