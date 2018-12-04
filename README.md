@@ -67,7 +67,7 @@ module.exports = {
 * megalo
 
 ``` js
-// webpack.base.conf.js
+// createBaseConfig.js
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
