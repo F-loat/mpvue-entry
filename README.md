@@ -28,9 +28,9 @@
 
 ## 原理
 
-以 `src/main.js` 为模板，使用配置文件中的 `path` 及 `config` 属性分别替换 `vue 文件导入路径` 及 `导出信息`
+以主入口文件为模板，使用配置文件中的 `path` 及 `config` 属性分别替换 `vue 文件导入路径` 及 `导出信息`
 
-## Quickstart*
+## Quickstart
 
 > https://github.com/F-loat/mpvue-quickstart
 
@@ -46,14 +46,16 @@ npm i mpvue-entry -D
 
 ## 使用
 
-> v2.0 版本仅支持 mpvue-loader@^1.1.0
+> v2.0 版本仅支持 mpvue-loader@^1.1.0，兼容 megalo
+
+* mpvue
 
 ``` js
 // webpack.base.conf.js
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: MpvueEntry.getEntry('src/pages.js'),
+  entry: () => MpvueEntry.getEntry(),
   ...
   plugins: [
     new MpvueEntry(),
@@ -62,39 +64,58 @@ module.exports = {
 }
 ```
 
+* megalo
+
 ``` js
-// pages.js
-module.exports = [
-  {
-    path: 'pages/news/list', // 页面路径，同时是 vue 文件相对于 src 的路径，必填
-    config: { // 页面配置，即 page.json 的内容，可选
-      navigationBarTitleText: '文章列表',
-      enablePullDownRefresh: true
+// webpack.base.conf.js
+const MpvueEntry = require('mpvue-entry')
+
+module.exports = {
+  entry: MpvueEntry.getEntry(), // 不支持动态更新
+  ...
+  plugins: [
+    new MpvueEntry({
+      overwrite: true // 强制覆盖已有配置
+    }),
+    ...
+  ]
+}
+```
+
+``` js
+// app.json
+{
+  "pages": [
+    {
+      "path": "pages/news/list", // 页面路径，同时是 vue 文件相对于 src 的路径，必填
+      "config": { // 页面配置，即 page.json 的内容，可选
+        "navigationBarTitleText": "文章列表",
+        "enablePullDownRefresh": true
+      }
     }
-  }
-]
+  ],
+  "window": {}
+}
 ```
 
 ## 参数
 
-* paths `String/Object`
+* paths: `String/Object`
 
 > paths 为 `String` 类型时作为 pages 的值，为绝对路径或相对于项目根目录的相对路径
 
 | property | default | describe |
 | :-: | :-: | :-: |
-| pages | 'src/pages.js' | 页面配置文件 |
+| config | 'src/app.json' | 项目配置文件 |
 | main | 'src/main.js' | 主入口文件，作为模板 |
 | template | 'src/main.js' | 入口模板文件，优先级较高 |
-| app | 'src/app.json' | 项目配置文件 |
-| dist | 'dist/' | 项目构建目录 |
 | entry | 'mpvue-entry/dist/' | 各页面入口文件目录 |
 
 ``` js
 // 示例
 MpvueEntry.getEntry({
-  pages: 'src/router/index.js',
-  dist: 'wxapp/',
+  config: 'src/app.js',
+  main: 'src/index.js'
 })
 ```
 
@@ -128,7 +149,7 @@ MpvueEntry.getEntry({
 
 ## Tips
 
-* 首页默认为 `pages.js` 中的第一项，但会被 `main.js` 中的配置覆盖
+* 首页为 `pages.js` 中的第一项
 
 * 可通过以下形式的注释指定 `main.js` 特有代码
 
@@ -156,13 +177,6 @@ module.exports = {
   ]
 }
 ```
-
-## 示例
-
-> 以 mpvue-loader@1.1.0 为界
-
-* [新版示例](./examples/current)
-* [旧版示例](./examples/legacy)
 
 ## Thanks
 
