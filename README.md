@@ -55,28 +55,10 @@ npm i mpvue-entry@next -D
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: () => MpvueEntry.getEntry(),
+  entry: MpvueEntry.getEntry(),
   ...
   plugins: [
     new MpvueEntry(),
-    ...
-  ]
-}
-```
-
-* megalo
-
-``` js
-// createBaseConfig.js
-const MpvueEntry = require('mpvue-entry')
-
-module.exports = {
-  entry: MpvueEntry.getEntry(), // 不支持动态更新
-  ...
-  plugins: [
-    new MpvueEntry({
-      overwrite: true // 强制覆盖已有配置
-    }),
     ...
   ]
 }
