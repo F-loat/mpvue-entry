@@ -4,7 +4,7 @@ const generate = require('@babel/generator').default;
 const { genEntry } = require('../lib/compiler');
 const { parseTemplate, parsePages } = require('../lib/parser');
 const { resolveApp, resolveModule } = require('../lib/utils/resolve');
-const { removeFile, resolveFile, isNativeModule } = require('../lib/utils/file');
+const { resolveFile, isNativeModule } = require('../lib/utils/file');
 
 function resolveTest(dir) {
   return path.join(__dirname, '../test', dir);
@@ -57,35 +57,23 @@ const app = new Vue({
   store,
   ...App
 });
-app.$mount();
-export default {
-  config: {
-    pages: ['^pages/b'],
-    window: {
-      backgroundTextStyle: 'light'
-    }
-  }
-};`);
+app.$mount();`);
     });
   });
 
   describe('genEntry', () => {
     const paths = {
-      pages: resolveTest('./assets/pages.js'),
+      config: resolveTest('./assets/config.js'),
       main: resolveTest('./assets/main.js'),
       template: resolveTest('./assets/main.js'),
-      app: resolveTest('./assets/app.json'),
-      dist: resolveTest('./assets'),
-      entry: resolveTest('./'),
+      entry: resolveTest('./dist'),
     };
     it('should return entry object', () => {
       const template = parseTemplate(paths);
       const pages = parsePages(paths);
-      genEntry(paths, pages, template).then((entry) => {
-        assert.equal(entry.app, resolveTest('./assets/main.js'));
-        assert.equal(entry['pages/a'], resolveTest('./pagesA.js'));
-        removeFile([entry['pages/a'], entry['pages/b']]);
-      });
+      const entry = genEntry(paths, pages, template);
+      assert.equal(entry.app, resolveTest('./assets/main.js'));
+      assert.equal(entry['pages/a'], resolveTest('./dist/pagesA.js'));
     });
   });
 });

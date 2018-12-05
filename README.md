@@ -21,8 +21,8 @@
 │ │     │─list.vue
 │ │     └─detail.vue
 │ ├─App.vue
-│ ├─main.js
-│ └─pages.js
+│ ├─app.json
+│ └─main.js
 └─package.json
 ```
 
@@ -41,7 +41,7 @@ vue init F-loat/mpvue-quickstart my-project
 ## 安装
 
 ``` bash
-npm i mpvue-entry -D
+npm i mpvue-entry@next -D
 ```
 
 ## 使用
@@ -163,6 +163,7 @@ console.log('coding')
 ```
 
 * 官方模板生成的项目请务必去除以下配置
+
 ``` js
 // webpack.base.conf.js
 module.exports = {

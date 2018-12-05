@@ -63,3 +63,4 @@ typings/
 
 #others
 test/assets/pages/*.json
+test/dist
