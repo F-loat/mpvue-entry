@@ -151,6 +151,8 @@ MpvueEntry.getEntry({
 
 * 首页为 `pages.js` 中的第一项
 
+* paths 的[相关配置](#参数)均可在项目 package.json 的 entryOptions 中覆盖
+
 * 可通过以下形式的注释指定 `main.js` 特有代码
 
 ``` js
