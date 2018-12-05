@@ -10,7 +10,7 @@ describe('index', () => {
     };
     it('should return entry function', () => {
       const entry = MpvueEntry.getEntry(paths);
-      assert.equal(typeof entry, 'object');
+      assert.equal(typeof entry, 'function');
     });
   });
 });
