@@ -1,9 +1,9 @@
 # mpvue-entry
 
-> 集中式页面配置，自动生成各页面的入口文件，优化目录结构，支持新增页面热更新
+> 集中式页面配置，统一构建入口，优化目录结构，支持新增页面热更新
 
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
-[![npm downloads](https://img.shields.io/npm/dw/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
+[![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![build status](https://travis-ci.org/F-loat/mpvue-entry.svg?branch=master)](https://travis-ci.org/F-loat/mpvue-entry)
 [![codecov](https://codecov.io/gh/F-loat/mpvue-entry/branch/master/graph/badge.svg)](https://codecov.io/gh/F-loat/mpvue-entry/branch/master)
 [![codebeat badge](https://codebeat.co/badges/c51b57e4-c809-404e-a825-4271a8e2e01e)](https://codebeat.co/projects/github-com-f-loat-mpvue-entry-master)
@@ -26,10 +26,6 @@
 └─package.json
 ```
 
-## 原理
-
-以主入口文件为模板，使用配置文件中的 `path` 及 `config` 属性分别替换 `vue 文件导入路径` 及 `导出信息`
-
 ## Quickstart
 
 > https://github.com/F-loat/mpvue-quickstart
@@ -48,8 +44,6 @@ npm i mpvue-entry@next -D
 
 > v2.0 版本仅支持 mpvue-loader@^1.1.0，兼容 megalo
 
-* mpvue
-
 ``` js
 // webpack.base.conf.js
 const MpvueEntry = require('mpvue-entry')
@@ -65,7 +59,7 @@ module.exports = {
 ```
 
 ``` js
-// app.json
+// app.json - 支持 js 格式，兼容微信小程序官方配置规范
 {
   "pages": [
     {
@@ -118,15 +112,22 @@ MpvueEntry.getEntry({
 
 ``` js
 // 示例
-[{
-  path: 'pages/news/list',
-  route: 'pages/news/list/main'
-}, {
-  path: 'package/news/detail',
-  root: 'package/news',
-  subPackage: true,
-  independent: true
-}]
+[
+  'pages/index',
+  {
+    path: 'pages/news/list',
+    config: {
+      navigationBarTitleText: '页面标题'
+    },
+    route: 'pages/news/list/main'
+  },
+  {
+    path: 'package/news/detail',
+    root: 'package/news',
+    subPackage: true,
+    independent: true
+  }
+]
 ```
 
 ## Tips
@@ -162,6 +163,8 @@ module.exports = {
   ]
 }
 ```
+
+* megalo 官方已对打包入口做了类似的优化，如无迁移需求可直接采用[官方方案](https://github.com/kaola-fed/megalo-aot/pull/22)
 
 ## Thanks
 
