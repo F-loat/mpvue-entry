@@ -55,7 +55,7 @@ npm i mpvue-entry@next -D
 const MpvueEntry = require('mpvue-entry')
 
 module.exports = {
-  entry: MpvueEntry.getEntry(),
+  entry: MpvueEntry.getEntry('src/app.json'),
   ...
   plugins: [
     new MpvueEntry(),
@@ -84,7 +84,7 @@ module.exports = {
 
 * paths: `String/Object`
 
-> paths 为 `String` 类型时作为 pages 的值，为绝对路径或相对于项目根目录的相对路径
+> paths 为 `String` 类型时作为 config 的值，为绝对路径或相对于项目根目录的相对路径
 
 | property | default | describe |
 | :-: | :-: | :-: |
