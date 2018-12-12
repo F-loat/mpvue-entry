@@ -132,7 +132,7 @@ MpvueEntry.getEntry({
 
 ## Tips
 
-* 首页为 `pages.js` 中的第一项
+* 首页为 `pages` 数组的第一项
 
 * paths 的[相关配置](#参数)均可在项目 package.json 的 entryOptions 中覆盖
 
