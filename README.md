@@ -1,6 +1,6 @@
 # mpvue-entry
 
-> 集中式页面配置，统一构建入口，优化目录结构，支持新增页面热更新
+> 自动生成构建入口，避免编写大量重复的 main.js 文件
 
 [![npm package](https://img.shields.io/npm/v/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
 [![npm downloads](https://img.shields.io/npm/dm/mpvue-entry.svg)](https://npmjs.org/package/mpvue-entry)
