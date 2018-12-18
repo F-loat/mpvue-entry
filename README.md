@@ -134,6 +134,8 @@ MpvueEntry.getEntry({
 
 * 首页为 `pages` 数组的第一项
 
+* 分包配置兼容微信小程序官方写法
+
 * paths 的[相关配置](#参数)均可在项目 package.json 的 entryOptions 中覆盖
 
 * 可通过以下形式的注释指定 `main.js` 特有代码
